@@ -34,6 +34,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 - [Atividades](#atividades)
 - [Outros Projetos Relacionados](#outros-projetos-relacionados)
   - [Cadastro de novo usuário](#cadastro-de-novo-usuário)
+    - [Implementação de Cadastro de novo usuário](#implementação-de-cadastro-de-novo-usuário)
   
 # Grade Curricular
 
@@ -87,5 +88,19 @@ Precisamos saber o instante do cadastro, login e senha.
 - <span style="color: red;">&cross;</span> O usuário precisa estar criado no sistema
 - <span style="color: red;">&cross;</span> O cliente que fez a requisição precisa saber que o usuário foi criado. Apenas um retorno com status 200 está suficente.
 - <span style="color: red;">&cross;</span> Em caso de falha de validação status 400
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Cadastro de novo usuário
+
+Para o cadastro de novo usuário, é necessário criar uma entidade específica para armazenar os dados. Esta entidade conterá email, senha, e data de criação. O campo de criação deve ser anotado com <code>@CreationTimestamp</code> para persistir a data e horário de criação. O atributo para e-mail deve ser anotado com <code>@Column(nullable = false, unique)</code> para que seja obrigatório e único. No caso de senha, a anotação é <code>@Column(nullable = false)</code> para informar a sua obrigatoriedade.
+
+Observação: a senha nunca pode ser armazenada como texto simples, já que isso pode facilitar a exposição de dados sensíveis dos clientes. Por este motivo, é interessante usar mecanismos de encriptação com algoritmos do tipo BCrypt ou equivalente, hashing, salting, entre outros. Outro ponto que pode ser interessante é a utilização de tokens de autenticação do tipo JWT para verificar se as credenciais de acesso são válidas.
+
+Para a validação na fronteira de entrada de dados, é interessante usar um Form Value Object. Deve haver um atributo para e-mail com anotação <code>@Email</code> para informar que deve ser um formato de e-mail válido, <code>@NotNull</code> para torná-lo obrigatório e uma outra anotação para verificar se o campo é único. Para senha, as anotações devem ser <code>@Size(min = 6)</code> para informar que a senha deve conter mais de 6 caracteres e <code>@NotNull</code> para informar que este campo não pode ser nulo.
+
+Para a persistência de dados propriamente dita, é necessária a criação de um repositório. Para comunicação entre cliente e servidor, é obrigatório o uso de controlador com endpoint que aceita requisições do tipo POST.
+
+Para a informar que o cadastro teve êxito, é importante usar um DTO para apresentar os dados relevantes ao cliente, isto é, que não sejam sensíveis.
 
 [Voltar ao menu](#tópicos)
