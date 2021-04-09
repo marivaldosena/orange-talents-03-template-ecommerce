@@ -33,6 +33,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 - [Desafio Mercado Livre](#desafio-mercado-livre)
 - [Atividades](#atividades)
 - [Outros Projetos Relacionados](#outros-projetos-relacionados)
+  - [Cadastro de novo usuário](#cadastro-de-novo-usuário)
   
 # Grade Curricular
 
@@ -65,5 +66,26 @@ ensinados ao longo das primeiras semanas.
 # Atividades
 
 Ao longo deste projeto, será necessária a realização de algumas atividades para atestar o conhecimento adquirido. As atividades devem ser resolvidas estritamente de acordo com o enunciado.
+
+[Voltar ao menu](#tópicos)
+
+## Cadastro de novo usuário
+
+Precisamos saber o instante do cadastro, login e senha.
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> O instante não pode ser nulo e não pode ser no futuro
+- <span style="color: red;">&cross;</span> O login não pode ser em branco ou nula
+- <span style="color: red;">&cross;</span> O login precisa ter o formato do email
+- <span style="color: red;">&cross;</span> A senha não pode ser branca ou nula
+- <span style="color: red;">&cross;</span> A senha precisa ter no mínimo 6 caracteres
+- <span style="color: red;">&cross;</span> A senha deve ser guardada usando algum algoritmo de hash da sua escolha.
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> O usuário precisa estar criado no sistema
+- <span style="color: red;">&cross;</span> O cliente que fez a requisição precisa saber que o usuário foi criado. Apenas um retorno com status 200 está suficente.
+- <span style="color: red;">&cross;</span> Em caso de falha de validação status 400
 
 [Voltar ao menu](#tópicos)
