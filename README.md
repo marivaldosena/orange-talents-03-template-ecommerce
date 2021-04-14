@@ -14,6 +14,7 @@
 [kotlin-url]: https://kotlinlang.org/
 [micronaut-url]: https://micronaut.io/
 [projeto-casa-do-codigo-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo
+[projeto-casa-do-codigo-email-unico-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo#implementação-do-cadastro-de-email-único
 
 <!-- Conteúdo -->
 # Zup Orange Talents | Desafio Mercado Livre
@@ -37,6 +38,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Cadastro de novo usuário](#implementação-de-cadastro-de-novo-usuário)
     - [Alterações de Cadastro de novo usuário](#[alterações-de-cadastro-de-novo-usuário)
   - [Email único](#email-único)
+    - [Implementação de Email único](#implementação-de-email-único)
   
 # Grade Curricular
 
@@ -126,5 +128,13 @@ Só pode existir um usuário com o mesmo email.
 ### Resultado esperado
 
 - <span style="color: green;">&check;</span> Status 400 informando que não foi possível realizar um cadastro com este email.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Email único
+
+Criaria um Constraint e um Validator para verificar a unicidade de e-mail e anotaria o atributo email do Form Value Object com esse Constraint.
+
+Vide [Implementação do Cadastro de email único][projeto-casa-do-codigo-email-unico-url].
 
 [Voltar ao menu](#tópicos)
