@@ -36,6 +36,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Cadastro de novo usuário](#cadastro-de-novo-usuário)
     - [Implementação de Cadastro de novo usuário](#implementação-de-cadastro-de-novo-usuário)
     - [Alterações de Cadastro de novo usuário](#[alterações-de-cadastro-de-novo-usuário)
+  - [Email único](#email-único)
   
 # Grade Curricular
 
@@ -111,5 +112,19 @@ Para a informar que o cadastro teve êxito, é importante usar um DTO para apres
 Durante a implementação, tive algumas ideias que decidi implementar. Uma delas foi o uso de Tokens de Acesso usando o JWT. Para tanto, decidi criar uma classe para gerenciar usuários, fazer a encriptação e verificação de senhas, geração de tokens e persistência de usuários.
 
 Adotei essa abordagem para concentrar funções semelhantes e relacionadas a todos os usuários. No entanto, usei a composição de classes, isto é, usar uma instância do gerenciador na entidade de usuário para o possamos fazer chamadas também por usuário sem nos preocuparmos como ele o faz.
+
+[Voltar ao menu](#tópicos)
+
+## Email único
+
+Não podemos ter dois usuários com o mesmo email.
+
+### Restrições
+
+Só pode existir um usuário com o mesmo email.
+
+### Resultado esperado
+
+- <span style="color: green;">&check;</span> Status 400 informando que não foi possível realizar um cadastro com este email.
 
 [Voltar ao menu](#tópicos)
