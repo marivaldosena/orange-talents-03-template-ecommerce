@@ -35,6 +35,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 - [Outros Projetos Relacionados](#outros-projetos-relacionados)
   - [Cadastro de novo usuário](#cadastro-de-novo-usuário)
     - [Implementação de Cadastro de novo usuário](#implementação-de-cadastro-de-novo-usuário)
+    - [Alterações de Cadastro de novo usuário](#[alterações-de-cadastro-de-novo-usuário)
   
 # Grade Curricular
 
@@ -76,18 +77,18 @@ Precisamos saber o instante do cadastro, login e senha.
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> O instante não pode ser nulo e não pode ser no futuro
-- <span style="color: red;">&cross;</span> O login não pode ser em branco ou nula
-- <span style="color: red;">&cross;</span> O login precisa ter o formato do email
-- <span style="color: red;">&cross;</span> A senha não pode ser branca ou nula
-- <span style="color: red;">&cross;</span> A senha precisa ter no mínimo 6 caracteres
-- <span style="color: red;">&cross;</span> A senha deve ser guardada usando algum algoritmo de hash da sua escolha.
+- <span style="color: green;">&check;</span> O instante não pode ser nulo e não pode ser no futuro
+- <span style="color: green;">&check;</span> O login não pode ser em branco ou nula
+- <span style="color: green;">&check;</span> O login precisa ter o formato do email
+- <span style="color: green;">&check;</span> A senha não pode ser branca ou nula
+- <span style="color: green;">&check;</span> A senha precisa ter no mínimo 6 caracteres
+- <span style="color: green;">&check;</span> A senha deve ser guardada usando algum algoritmo de hash da sua escolha.
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> O usuário precisa estar criado no sistema
-- <span style="color: red;">&cross;</span> O cliente que fez a requisição precisa saber que o usuário foi criado. Apenas um retorno com status 200 está suficente.
-- <span style="color: red;">&cross;</span> Em caso de falha de validação status 400
+- <span style="color: green;">&check;</span> O usuário precisa estar criado no sistema
+- <span style="color: green;">&check;</span> O cliente que fez a requisição precisa saber que o usuário foi criado. Apenas um retorno com status 200 está suficente.
+- <span style="color: green;">&check;</span> Em caso de falha de validação status 400
 
 [Voltar ao menu](#tópicos)
 
@@ -95,12 +96,20 @@ Precisamos saber o instante do cadastro, login e senha.
 
 Para o cadastro de novo usuário, é necessário criar uma entidade específica para armazenar os dados. Esta entidade conterá email, senha, e data de criação. O campo de criação deve ser anotado com <code>@CreationTimestamp</code> para persistir a data e horário de criação. O atributo para e-mail deve ser anotado com <code>@Column(nullable = false, unique)</code> para que seja obrigatório e único. No caso de senha, a anotação é <code>@Column(nullable = false)</code> para informar a sua obrigatoriedade.
 
-Observação: a senha nunca pode ser armazenada como texto simples, já que isso pode facilitar a exposição de dados sensíveis dos clientes. Por este motivo, é interessante usar mecanismos de encriptação com algoritmos do tipo BCrypt ou equivalente, hashing, salting, entre outros. Outro ponto que pode ser interessante é a utilização de tokens de autenticação do tipo JWT para verificar se as credenciais de acesso são válidas.
+**Observação:** *a senha nunca pode ser armazenada como texto simples, já que isso pode facilitar a exposição de dados sensíveis dos clientes. Por este motivo, é interessante usar mecanismos de encriptação com algoritmos do tipo BCrypt ou equivalente, hashing, salting, entre outros. Outro ponto que pode ser interessante é a utilização de tokens de autenticação do tipo JWT para verificar se as credenciais de acesso são válidas.*
 
 Para a validação na fronteira de entrada de dados, é interessante usar um Form Value Object. Deve haver um atributo para e-mail com anotação <code>@Email</code> para informar que deve ser um formato de e-mail válido, <code>@NotNull</code> para torná-lo obrigatório e uma outra anotação para verificar se o campo é único. Para senha, as anotações devem ser <code>@Size(min = 6)</code> para informar que a senha deve conter mais de 6 caracteres e <code>@NotNull</code> para informar que este campo não pode ser nulo.
 
 Para a persistência de dados propriamente dita, é necessária a criação de um repositório. Para comunicação entre cliente e servidor, é obrigatório o uso de controlador com endpoint que aceita requisições do tipo POST.
 
 Para a informar que o cadastro teve êxito, é importante usar um DTO para apresentar os dados relevantes ao cliente, isto é, que não sejam sensíveis.
+
+[Voltar ao menu](#tópicos)
+
+### Alterações de Cadastro de novo usuário
+
+Durante a implementação, tive algumas ideias que decidi implementar. Uma delas foi o uso de Tokens de Acesso usando o JWT. Para tanto, decidi criar uma classe para gerenciar usuários, fazer a encriptação e verificação de senhas, geração de tokens e persistência de usuários.
+
+Adotei essa abordagem para concentrar funções semelhantes e relacionadas a todos os usuários. No entanto, usei a composição de classes, isto é, usar uma instância do gerenciador na entidade de usuário para o possamos fazer chamadas também por usuário sem nos preocuparmos como ele o faz.
 
 [Voltar ao menu](#tópicos)
