@@ -40,6 +40,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Email único](#email-único)
     - [Implementação de Email único](#implementação-de-email-único)
   - [Cadastro de categorias](#cadastro-de-categorias)
+    - [Implementação de Cadastro de categorias](#implementação-de-cadastro-de-categorias)
   
 # Grade Curricular
 
@@ -156,5 +157,25 @@ No mercado livre você pode criar hierarquias de categorias livres. Ex: Tecnolog
 
 - <span style="color: red;">&cross;</span> categoria criada e status 200 retornado pelo endpoint.
 - <span style="color: red;">&cross;</span> caso exista erros de validação, o endpoint deve retornar 400 e o json dos erros.
+
+[Voltar ao menu](#tópicos)
+
+## Implementação de Cadastro de categorias
+
+Para o cadastro de categoria, acredito que seja necessário a criação de uma entidade com os seguintes campos:
+
+- nome do tipo String contendo o nome da categoria e cuja anotação é <code>@Column(nullable = false)</code>.
+- mae do tipo Categoria cujas anotações são: <code>@OneToOne</code> para informar que a categoria deve pertencer a, no máximo, uma outra categoria e <code>@JoinColumn</code> para informar o nome da coluna e se o atributo é obrigatório.
+- filhas do tipo Set<Categoria> para informar que as categorias podem conter outras e que estas devem ser únicas. A anotação que utilizaria aqui é <code>@OneToMany(mappedBy = "mae")</code> para designar o tipo de relacionamento com suas respectivas filhas e como acessar a categoria mãe.
+
+Para a criação de categoria, iremos seguir a notória receita de:
+
+|Componente|Descrição|
+|-|-|
+|Controlador|Serve para a entrada de dados|
+|Form Value Object| Para validação e consistência de dados|
+|Repositório| Persistência de dados e gerenciamento de entidades|
+|Entidade|Estrutura e persistência de dados|
+|DTO|Comunicação entre camadas e resposta da requisição|
 
 [Voltar ao menu](#tópicos)
