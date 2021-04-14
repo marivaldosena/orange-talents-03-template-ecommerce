@@ -39,6 +39,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Alterações de Cadastro de novo usuário](#[alterações-de-cadastro-de-novo-usuário)
   - [Email único](#email-único)
     - [Implementação de Email único](#implementação-de-email-único)
+  - [Cadastro de categorias](#cadastro-de-categorias)
   
 # Grade Curricular
 
@@ -136,5 +137,24 @@ Só pode existir um usuário com o mesmo email.
 Criaria um Constraint e um Validator para verificar a unicidade de e-mail e anotaria o atributo email do Form Value Object com esse Constraint.
 
 Vide [Implementação do Cadastro de email único][projeto-casa-do-codigo-email-unico-url].
+
+[Voltar ao menu](#tópicos)
+
+## Cadastro de categorias
+
+No mercado livre você pode criar hierarquias de categorias livres. Ex: Tecnologia -> Celulares -> Smartphones -> Android,Ios etc. Perceba que o sistema precisa ser flexível o suficiente para que essas sequências sejam criadas.
+
+- <span style="color: red;">&cross;</span> Toda categoria tem um nome
+- <span style="color: red;">&cross;</span> A categoria pode ter uma categoria mãe
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> O nome da categoria é obrigatório
+- <span style="color: red;">&cross;</span> O nome da categoria precisa ser único
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> categoria criada e status 200 retornado pelo endpoint.
+- <span style="color: red;">&cross;</span> caso exista erros de validação, o endpoint deve retornar 400 e o json dos erros.
 
 [Voltar ao menu](#tópicos)

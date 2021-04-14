@@ -1,15 +1,14 @@
 package com.github.marivaldosena.mercadolivre.constraints;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
 public class UniqueValidator implements ConstraintValidator<Unique, String> {
-    @Autowired
+    @PersistenceContext
     private EntityManager manager;
 
     private Class<?> entity;
