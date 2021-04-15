@@ -14,7 +14,7 @@ import java.net.URI;
 @RestController
 @RequestMapping(RegistrationController.RESOURCE_URL)
 public class RegistrationController {
-    final static String RESOURCE_URL = "/api/v1/register";
+    final static String RESOURCE_URL = "/api/v1/auth/register";
     final static String USERS_URL = "/api/v1/users";
 
     private UserManager userManager;

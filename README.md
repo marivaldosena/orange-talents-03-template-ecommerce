@@ -184,7 +184,7 @@ Para a criação de categoria, iremos seguir a notória receita de:
 
 ## Autenticação de usuário
 
-Você precisa configurar um mecanismo de autenticação via token, provavelmente com o Spring Security, para permitir o login via Token JWT.
+Você precisa configurar um mecanismo de autenticação via token, provavelmente com o Spring Security, para permitir a autenticação.
 
 [Voltar ao menu](#tópicos)
 
