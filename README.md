@@ -41,6 +41,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Email único](#implementação-de-email-único)
   - [Cadastro de categorias](#cadastro-de-categorias)
     - [Implementação de Cadastro de categorias](#implementação-de-cadastro-de-categorias)
+  - [Autenticação de usuário](#autenticação-de-usuário)
   
 # Grade Curricular
 
@@ -177,5 +178,11 @@ Para a criação de categoria, iremos seguir a notória receita de:
 |Repositório| Persistência de dados e gerenciamento de entidades|
 |Entidade|Estrutura e persistência de dados|
 |DTO|Comunicação entre camadas e resposta da requisição|
+
+[Voltar ao menu](#tópicos)
+
+## Autenticação de usuário
+
+Você precisa configurar um mecanismo de autenticação via token, provavelmente com o Spring Security, para permitir o login via Token JWT.
 
 [Voltar ao menu](#tópicos)
