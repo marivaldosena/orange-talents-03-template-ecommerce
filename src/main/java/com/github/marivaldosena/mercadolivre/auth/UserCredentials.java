@@ -46,4 +46,8 @@ public class UserCredentials implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User toEntity() {
+        return user;
+    }
 }

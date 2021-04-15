@@ -26,11 +26,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         Optional<User> user = Optional.ofNullable(userManager.getUserByToken(token));
 
         if (user.isPresent()) {
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.get(), null);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            authenticate(user.get());
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private void authenticate(User user) {
+        UserCredentials credentials = new UserCredentials(user);
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(credentials, null, credentials.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     private String retrieveToken(HttpServletRequest request) {
