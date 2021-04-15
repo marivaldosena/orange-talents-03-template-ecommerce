@@ -42,6 +42,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Cadastro de categorias](#cadastro-de-categorias)
     - [Implementação de Cadastro de categorias](#implementação-de-cadastro-de-categorias)
   - [Autenticação de usuário](#autenticação-de-usuário)
+    - [Implementação de Autenticação de usuário](#implementação-de-autenticação-de-usuário)
   
 # Grade Curricular
 
@@ -146,18 +147,18 @@ Vide [Implementação do Cadastro de email único][projeto-casa-do-codigo-email-
 
 No mercado livre você pode criar hierarquias de categorias livres. Ex: Tecnologia -> Celulares -> Smartphones -> Android,Ios etc. Perceba que o sistema precisa ser flexível o suficiente para que essas sequências sejam criadas.
 
-- <span style="color: red;">&cross;</span> Toda categoria tem um nome
-- <span style="color: red;">&cross;</span> A categoria pode ter uma categoria mãe
+- <span style="color: green;">&check;</span> Toda categoria tem um nome
+- <span style="color: green;">&check;</span> A categoria pode ter uma categoria mãe
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> O nome da categoria é obrigatório
-- <span style="color: red;">&cross;</span> O nome da categoria precisa ser único
+- <span style="color: green;">&check;</span> O nome da categoria é obrigatório
+- <span style="color: green;">&check;</span> O nome da categoria precisa ser único
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> categoria criada e status 200 retornado pelo endpoint.
-- <span style="color: red;">&cross;</span> caso exista erros de validação, o endpoint deve retornar 400 e o json dos erros.
+- <span style="color: green;">&check;</span> categoria criada e status 200 retornado pelo endpoint.
+- <span style="color: green;">&check;</span> caso exista erros de validação, o endpoint deve retornar 400 e o json dos erros.
 
 [Voltar ao menu](#tópicos)
 
@@ -184,5 +185,27 @@ Para a criação de categoria, iremos seguir a notória receita de:
 ## Autenticação de usuário
 
 Você precisa configurar um mecanismo de autenticação via token, provavelmente com o Spring Security, para permitir o login via Token JWT.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Autenticação de usuário
+
+Para configurar autenticação de usuário na aplicação, é importante criar alguns elementos necessários.
+
+O primeiro passo é criar uma classe que herde de <code>WebSecurityConfigurerAdapter</code> com duas anotações: <code>@Configuration</code> para informar que é uma configuração gerenciada pelo Spring e <code>@EnableWebSecurity</code> para informar que a segurança da aplicação será habilitada e seguirá as configurações definidas.
+
+A classe que herda de <code>WebSecurityConfigurerAdapter</code> deverá sobrescrever o método cuja assinatura é <code>AuthenticationManager authenticationManager() throws Exception</code> e deverá conter a anotação <code>@Bean</code> para informar ao Spring que ele deverá gerenciá-lo como um Java Bean.
+
+Além desse método, o <code>void configure(AuthenticationManagerBuilder auth) throws Exception</code> também deverá ser sobrescrito para que o Spring saiba qual classe será responsável por verificar a existência de usuários autenticados e como obter os dados necessários. Além disso, é possível escolher o padrão de Hashing com este método.
+
+Outro método relevante que deve ser sobrescrito é o <code>void configure(HttpSecurity http) throws Exception</code> para configurar quais serão os endpoints permitidos sem a necessidade de autenticação, qual a classe responsável pelo gerenciamento de tokens de acesso, o tipo de política de sessão, entre outros.
+
+A classe responsável por gerenciar os tokens de acesso deve herdar de <code>OncePerRequestFilter</code> para que o sistema faça somente uma verificação de token por requisição. Para verificar se o token é válido, devemos sobrescrever o método <code>void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException</code>.
+
+Para gerenciar usuários, é necessário utilizar uma classe que implemente a interface <code>UserDetailsService</code>. Esta interface possui um método com a assinatura <code>UserDetails loadUserByUsername(String username) throws UsernameNotFoundException</code>. É neste método que devemos fazer a verificação de existência de usuário.
+
+A classe que herda de <code>UserDetailsService</code> trabalha apenas com a interface <code>UserDetails</code>, ou seja, ela não sabe como são os detalhes de usuário além dos definidos por esta interface. Dessa forma, podemos ter duas abordagens: uma classe que contenha todos os dados necessários ao nosso usuário ou uma classe à parte responsável que implemente apenas os detalhes de autenticação.
+
+Na primeira abordagem teremos uma classe extensa com diversos métodos obrigatórios devido a esta interface. Na segunda, teremos duas classes menores com responsabilidades distintas, ou seja, podemos alterar detalhes de implementação sem nos afetar o usuário e podemos acrescentar mais dados ao usuário sem afetar a autenticação mantendo ambas classes coesas e especializadas em suas respectivas funções.
 
 [Voltar ao menu](#tópicos)
