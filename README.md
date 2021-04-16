@@ -45,6 +45,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Autenticação de usuário](#autenticação-de-usuário)
     - [Implementação de Autenticação de usuário](#implementação-de-autenticação-de-usuário)
   - [Usuário logado cadastra novo produto](#usuário-logado-cadastra-novo-produto)
+    - [Implementação de Usuário logado cadastra novo produto](#implementação-de-usuário-logado-cadastra-novo-produto)
   
 # Grade Curricular
 
@@ -239,5 +240,32 @@ Aqui a gente vai permitir o cadastro de um produto por usuário logado.
 
 - <span style="color: red;">&cross;</span> Um novo produto criado e status 200 retornado
 - <span style="color: red;">&cross;</span> Caso dê erro de validação retorne 400 e o json dos erros
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Usuário logado cadastra novo produto
+
+Para o cadastro de produtos, utilizaria uma entidade Produto que teria os seguintes campos:
+
+- nome do tipo String com anotação <code>@Column(nullable = false)</code> para torná-lo obrigatório.
+
+- valor do tipo BigDecimal com anotação <code>@Column(nullable = false)</code> para informar sua obrigatoriedade e <code>@Min(0.01)</code> para informar que deve ser um valor positivo e de, ao menos, um centavo.
+
+- quantidade do tipo Integer com anotação <code>@Column(nullable = false)</code> para torná-lo obrigatório e <code>@Min(0)</code> para informar que deve ser maior ou igual a zero.
+
+- caracteristicas do tipo Set&lt;CaracteristicasDeProduto&gt; com anotação <code>@ManyToMany</code> para relacionamento muitos-para-muitos, já que um produto pode ter diversas características e uma característica pode estar presente em diversos produtos. Para atender ao requisito de, ao menos, três características de produtos, será necessário usar um ConstraintValidator para impor esta regra. Usando um Set nos ajuda a evitar características repetidas.
+
+- descricao do tipo String com anotação <code>@Column(nullable = false, length = 1000)</code> para informar que é obrigatório e deve conter, no máximo, mil caracteres.
+
+- categoria do tipo Categoria com anotação <code>@ManyToOne</code> e <code>@JoinColumn(name = "categoria_id")</code> para informar que todo produto deve pertencer a apenas uma categoria e que uma categoria pode possuir diversos produtos e cujo identificador será armazenado na coluna categoria_id.
+
+- dataDoCadastro do tipo LocalDateTime com anotação <code>@CreationTimestamp</code> para armazenar o instante de cadastro do produto e <code>@Column(name = "data_cadastro")</code> para definir o nome da coluna como data_cadastro.
+
+Além dessa entidade, é necessário criar outra para características de produto. Para tanto, utilizaria os seguintes atributos:
+
+- nome do tipo String com anotação <code>@Column(nullable = false)</code> para torná-lo obrigatório.
+- descricao do tipo String com anotação <code>@Column(nullable = false, length = 1000)</code> para impor as mesmas restrições do atributo homônimo da entidade Produto.
+
+Criaria um Form Value Object para validar produto e característica, repositórios de persistência de dados para ambos e controladores seguindo o padrão já acordado, vide Casa do Código.
 
 [Voltar ao menu](#tópicos)
