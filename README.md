@@ -46,6 +46,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Autenticação de usuário](#implementação-de-autenticação-de-usuário)
   - [Usuário logado cadastra novo produto](#usuário-logado-cadastra-novo-produto)
     - [Implementação de Usuário logado cadastra novo produto](#implementação-de-usuário-logado-cadastra-novo-produto)
+    - [Alterações de Usuário logado cadastra novo produto](#alterações-de-usuário-logado-cadastra-novo-produto)
   
 # Grade Curricular
 
@@ -266,6 +267,14 @@ Além dessa entidade, é necessário criar outra para características de produt
 - nome do tipo String com anotação <code>@Column(nullable = false)</code> para torná-lo obrigatório.
 - descricao do tipo String com anotação <code>@Column(nullable = false, length = 1000)</code> para impor as mesmas restrições do atributo homônimo da entidade Produto.
 
-Criaria um Form Value Object para validar produto e característica, repositórios de persistência de dados para ambos e controladores seguindo o padrão já acordado, vide Casa do Código.
+Criaria um Form Value Object para validar produto e característica, repositórios de persistência de dados para ambos e controladores seguindo o padrão já acordado, vide [Casa do Código][projeto-casa-do-codigo-url].
+
+[Voltar ao menu](#tópicos)
+
+### Alterações de Usuário logado cadastra novo produto
+
+Para a validação de características de produtos não foi necessário a criação de ValidatorConstraint, apenas o uso de @UniqueElements com sobrescrita os de equals e hashCode para impedir elementos com o mesmo nome no mesmo produto.
+
+No entanto, produtos distintos podem ter os mesmos atributos e descrição. Portanto, é interessante realizar a busca destes produtos ao invés de criar produtos novos.
 
 [Voltar ao menu](#tópicos)
