@@ -15,6 +15,7 @@
 [micronaut-url]: https://micronaut.io/
 [projeto-casa-do-codigo-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo
 [projeto-casa-do-codigo-email-unico-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo#implementação-do-cadastro-de-email-único
+[mercado-livre-produto-detalhes-url]: https://produto.mercadolivre.com.br/MLB-1279370191-bebedouro-bomba-eletrica-p-garrafo-galo-agua-recarregavel-_JM?variation=48969374724#reco_item_pos=0&reco_backend=navigation&reco_backend_type=function&reco_client=home_navigation-recommendations&reco_id=e55bf74a-9551-42d8-a43d-fb64fa3117d4&c_id=/home/navigation-recommendations/element&c_element_order=1&c_uid=761d5d17-5baf-4fd8-be79-fc65ee66a6fb
 
 <!-- Conteúdo -->
 # Zup Orange Talents | Desafio Mercado Livre
@@ -43,6 +44,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Cadastro de categorias](#implementação-de-cadastro-de-categorias)
   - [Autenticação de usuário](#autenticação-de-usuário)
     - [Implementação de Autenticação de usuário](#implementação-de-autenticação-de-usuário)
+  - [Usuário logado cadastra novo produto](#usuário-logado-cadastra-novo-produto)
   
 # Grade Curricular
 
@@ -207,5 +209,35 @@ Para gerenciar usuários, é necessário utilizar uma classe que implemente a in
 A classe que herda de <code>UserDetailsService</code> trabalha apenas com a interface <code>UserDetails</code>, ou seja, ela não sabe como são os detalhes de usuário além dos definidos por esta interface. Dessa forma, podemos ter duas abordagens: uma classe que contenha todos os dados necessários ao nosso usuário ou uma classe à parte responsável que implemente apenas os detalhes de autenticação.
 
 Na primeira abordagem teremos uma classe extensa com diversos métodos obrigatórios devido a esta interface. Na segunda, teremos duas classes menores com responsabilidades distintas, ou seja, podemos alterar detalhes de implementação sem nos afetar o usuário e podemos acrescentar mais dados ao usuário sem afetar a autenticação mantendo ambas classes coesas e especializadas em suas respectivas funções.
+
+[Voltar ao menu](#tópicos)
+
+## Usuário logado cadastra novo produto
+
+Aqui a gente vai permitir o cadastro de um produto por usuário logado.
+
+### Necessidades
+
+- <span style="color: red;">&cross;</span> Tem um nome
+- <span style="color: red;">&cross;</span> Tem um valor
+- <span style="color: red;">&cross;</span> Tem quantidade disponível
+- <span style="color: red;">&cross;</span> Características(cada produto pode ter um conjunto de características diferente). [Da uma olhada na parte de outras características nos detalhes de produtos do Mercado Livre][mercado-livre-produto-detalhes-url]. Cada característica tem um nome e uma descricao associada.
+- <span style="color: red;">&cross;</span> Tem uma descrição
+- <span style="color: red;">&cross;</span> Pertence a uma categoria
+- <span style="color: red;">&cross;</span> Instante de cadastro
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> Nome é obrigatório
+- <span style="color: red;">&cross;</span> Valor é obrigatório e maior que zero
+- <span style="color: red;">&cross;</span> Quantidade é obrigatório e >= 0
+- <span style="color: red;">&cross;</span> O produto possui pelo menos três características
+- <span style="color: red;">&cross;</span> Descrição é obrigatória e tem máximo de 1000 caracteres.
+- <span style="color: red;">&cross;</span> A categoria é obrigatória
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Um novo produto criado e status 200 retornado
+- <span style="color: red;">&cross;</span> Caso dê erro de validação retorne 400 e o json dos erros
 
 [Voltar ao menu](#tópicos)
