@@ -1,9 +1,12 @@
 package com.github.marivaldosena.mercadolivre.categories;
 
+import com.github.marivaldosena.mercadolivre.products.Product;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,6 +29,9 @@ public class Category {
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private Set<Category> children;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 
     /**
      * @deprecated Hibernate only.
@@ -68,6 +74,10 @@ public class Category {
     }
 
     public Set<Category> getChildren() {
-        return children;
+        return Collections.unmodifiableSet(children);
+    }
+
+    public List<Product> getProducts() {
+        return Collections.unmodifiableList(products);
     }
 }

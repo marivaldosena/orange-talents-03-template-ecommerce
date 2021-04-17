@@ -7,8 +7,10 @@ import org.hibernate.validator.constraints.UniqueElements;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CreateProductRequest {
     @NotNull
@@ -59,7 +61,7 @@ public class CreateProductRequest {
     }
 
     public Set<ProductDetailRequest> getCharacteristics() {
-        return characteristics;
+        return Collections.unmodifiableSet(characteristics);
     }
 
     public String getCategory() {
@@ -68,5 +70,12 @@ public class CreateProductRequest {
 
     public void setCharacteristics(Set<ProductDetailRequest> characteristics) {
         this.characteristics = characteristics;
+    }
+
+    public Product toEntity() {
+        Set<Characteristic> productDetails = this.getCharacteristics().stream().map(ProductDetailRequest::toEntity).collect(Collectors.toSet());
+        Product entity = new Product(product, price, quantity, description);
+        entity.setDetails(productDetails);
+        return entity;
     }
 }

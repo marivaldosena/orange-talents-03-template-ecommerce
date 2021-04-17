@@ -39,4 +39,8 @@ public class ProductDetailRequest {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public Characteristic toEntity() {
+        return new Characteristic(name, description);
+    }
 }

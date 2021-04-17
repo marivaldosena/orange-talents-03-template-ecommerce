@@ -1,5 +1,6 @@
 package com.github.marivaldosena.mercadolivre.errors;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ErrorsListResponse {
@@ -10,6 +11,6 @@ public class ErrorsListResponse {
     }
 
     public List<ErrorDto> getErrors() {
-        return errors;
+        return Collections.unmodifiableList(errors);
     }
 }
