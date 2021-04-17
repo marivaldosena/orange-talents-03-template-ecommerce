@@ -220,27 +220,27 @@ Aqui a gente vai permitir o cadastro de um produto por usuário logado.
 
 ### Necessidades
 
-- <span style="color: red;">&cross;</span> Tem um nome
-- <span style="color: red;">&cross;</span> Tem um valor
-- <span style="color: red;">&cross;</span> Tem quantidade disponível
-- <span style="color: red;">&cross;</span> Características(cada produto pode ter um conjunto de características diferente). [Da uma olhada na parte de outras características nos detalhes de produtos do Mercado Livre][mercado-livre-produto-detalhes-url]. Cada característica tem um nome e uma descricao associada.
-- <span style="color: red;">&cross;</span> Tem uma descrição
-- <span style="color: red;">&cross;</span> Pertence a uma categoria
-- <span style="color: red;">&cross;</span> Instante de cadastro
+- <span style="color: green;">&check;</span> Tem um nome
+- <span style="color: green;">&check;</span> Tem um valor
+- <span style="color: green;">&check;</span> Tem quantidade disponível
+- <span style="color: green;">&check;</span> Características(cada produto pode ter um conjunto de características diferente). [Da uma olhada na parte de outras características nos detalhes de produtos do Mercado Livre][mercado-livre-produto-detalhes-url]. Cada característica tem um nome e uma descricao associada.
+- <span style="color: green;">&check;</span> Tem uma descrição
+- <span style="color: green;">&check;</span> Pertence a uma categoria
+- <span style="color: green;">&check;</span> Instante de cadastro
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> Nome é obrigatório
-- <span style="color: red;">&cross;</span> Valor é obrigatório e maior que zero
-- <span style="color: red;">&cross;</span> Quantidade é obrigatório e >= 0
-- <span style="color: red;">&cross;</span> O produto possui pelo menos três características
-- <span style="color: red;">&cross;</span> Descrição é obrigatória e tem máximo de 1000 caracteres.
-- <span style="color: red;">&cross;</span> A categoria é obrigatória
+- <span style="color: green;">&check;</span> Nome é obrigatório
+- <span style="color: green;">&check;</span> Valor é obrigatório e maior que zero
+- <span style="color: green;">&check;</span> Quantidade é obrigatório e >= 0
+- <span style="color: green;">&check;</span> O produto possui pelo menos três características
+- <span style="color: green;">&check;</span> Descrição é obrigatória e tem máximo de 1000 caracteres.
+- <span style="color: green;">&check;</span> A categoria é obrigatória
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Um novo produto criado e status 200 retornado
-- <span style="color: red;">&cross;</span> Caso dê erro de validação retorne 400 e o json dos erros
+- <span style="color: green;">&check;</span> Um novo produto criado e status 200 retornado
+- <span style="color: green;">&check;</span> Caso dê erro de validação retorne 400 e o json dos erros
 
 [Voltar ao menu](#tópicos)
 
