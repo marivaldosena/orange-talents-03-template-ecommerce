@@ -1,11 +1,13 @@
 package com.github.marivaldosena.mercadolivre.auth;
 
+import com.github.marivaldosena.mercadolivre.products.Product;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +28,9 @@ public class User {
 
     @CreationTimestamp
     private LocalDateTime registrationDate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
 
     @Transient
     private UserManager userManager;
@@ -61,6 +66,10 @@ public class User {
 
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 
     public void setNewPassword(String password) {

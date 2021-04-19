@@ -1,5 +1,6 @@
 package com.github.marivaldosena.mercadolivre.products;
 
+import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.categories.Category;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -49,6 +50,11 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false,
         foreignKey = @ForeignKey(name = "fk_category_id"))
     private Category category;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false,
+        foreignKey = @ForeignKey(name = "fk_user_id"))
+    private User user;
 
     /**
      * @deprecated Hibernate only;
@@ -103,11 +109,19 @@ public class Product {
         return category;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void setDetails(Set<Characteristic> details) {
         this.details = details;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -76,6 +76,7 @@ public class CreateProductRequest {
         Set<Characteristic> productDetails = this.getCharacteristics().stream().map(ProductDetailRequest::toEntity).collect(Collectors.toSet());
         Product entity = new Product(product, price, quantity, description);
         entity.setDetails(productDetails);
+
         return entity;
     }
 }
