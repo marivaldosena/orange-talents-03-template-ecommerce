@@ -56,6 +56,9 @@ public class Product {
         foreignKey = @ForeignKey(name = "fk_user_id"))
     private User user;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private Set<ProductImage> images;
+
     /**
      * @deprecated Hibernate only;
      */
@@ -111,6 +114,10 @@ public class Product {
 
     public User getUser() {
         return user;
+    }
+
+    public Set<ProductImage> getImages() {
+        return images;
     }
 
     public void setDetails(Set<Characteristic> details) {

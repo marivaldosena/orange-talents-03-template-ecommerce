@@ -29,7 +29,7 @@ public class User {
     @CreationTimestamp
     private LocalDateTime registrationDate;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     private List<Product> products;
 
     @Transient

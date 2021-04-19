@@ -30,7 +30,7 @@ public class Category {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private Set<Category> children;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE)
     private List<Product> products;
 
     /**
