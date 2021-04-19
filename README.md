@@ -47,6 +47,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Usuário logado cadastra novo produto](#usuário-logado-cadastra-novo-produto)
     - [Implementação de Usuário logado cadastra novo produto](#implementação-de-usuário-logado-cadastra-novo-produto)
     - [Alterações de Usuário logado cadastra novo produto](#alterações-de-usuário-logado-cadastra-novo-produto)
+  - [Usuário logado adiciona imagem no seu produto](#usuário-logado-adiciona-imagem-no-seu-produto)
   
 # Grade Curricular
 
@@ -276,5 +277,26 @@ Criaria um Form Value Object para validar produto e característica, repositóri
 Para a validação de características de produtos não foi necessário a criação de ValidatorConstraint, apenas o uso de @UniqueElements com sobrescrita os de equals e hashCode para impedir elementos com o mesmo nome no mesmo produto.
 
 No entanto, produtos distintos podem ter os mesmos atributos e descrição. Portanto, é interessante realizar a busca destes produtos ao invés de criar produtos novos.
+
+[Voltar ao menu](#tópicos)
+
+## Usuário logado adiciona imagem no seu produto
+
+Com um produto cadastrado, um usuário logado pode adicionar imagens ao seu produto. Não precisa salvar a imagem em algum cloud ou no próprio sistema de arquivos. Cada arquivo de imagem pode virar um link ficticio que pode ser adicionado ao produto.
+
+### Necessidades
+
+- <span style="color: red;">&cross;</span> Adicionar uma ou mais imagens a um determinado produto do próprio usuário
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> Tem uma ou mais fotos
+- <span style="color: red;">&cross;</span> Só pode adicionar fotos ao produto que pertence ao próprio usuário
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Imagens adicionadas e 200 como retorno
+- <span style="color: red;">&cross;</span> Caso dê erro de validação retorne 400 e o json dos erros
+- <span style="color: red;">&cross;</span> Caso tente adicionar imagens a um produto que não é seu retorne 403.
 
 [Voltar ao menu](#tópicos)
