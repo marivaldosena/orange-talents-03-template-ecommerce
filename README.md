@@ -48,6 +48,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Usuário logado cadastra novo produto](#implementação-de-usuário-logado-cadastra-novo-produto)
     - [Alterações de Usuário logado cadastra novo produto](#alterações-de-usuário-logado-cadastra-novo-produto)
   - [Usuário logado adiciona imagem no seu produto](#usuário-logado-adiciona-imagem-no-seu-produto)
+    - [Implementação de Usuário logado adiciona imagem no seu produto](#implementação-de-usuário-logado-adiciona-imagem-no-seu-produto)
   
 # Grade Curricular
 
@@ -298,5 +299,13 @@ Com um produto cadastrado, um usuário logado pode adicionar imagens ao seu prod
 - <span style="color: red;">&cross;</span> Imagens adicionadas e 200 como retorno
 - <span style="color: red;">&cross;</span> Caso dê erro de validação retorne 400 e o json dos erros
 - <span style="color: red;">&cross;</span> Caso tente adicionar imagens a um produto que não é seu retorne 403.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Usuário logado adiciona imagem no seu produto
+
+Para armazenar imagens, é preciso criar uma entidade para armazenar uma lista de objetos a serem tradados pelo servidor. Esta entidade deve conter o nome do arquivo e o local de armazenamento.
+
+Para o armazenamento propriamente dito, no lado cliente, precisamos enviar o arquivo por intermédio de um formulário do tipo Multipart e, no lado servidor, precisamos obter os bytes do arquivo e escrevê-lo em disco ou outro meio de armazenamento, sendo o AWS S3 (ou similar) uma opção viável.
 
 [Voltar ao menu](#tópicos)
