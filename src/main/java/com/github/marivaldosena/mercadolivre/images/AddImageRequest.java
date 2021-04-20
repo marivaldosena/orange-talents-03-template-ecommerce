@@ -1,4 +1,4 @@
-package com.github.marivaldosena.mercadolivre.products;
+package com.github.marivaldosena.mercadolivre.images;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import feign.form.FormProperty;

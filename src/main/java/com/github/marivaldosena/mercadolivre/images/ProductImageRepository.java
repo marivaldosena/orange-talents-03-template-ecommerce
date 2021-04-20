@@ -1,4 +1,4 @@
-package com.github.marivaldosena.mercadolivre.products;
+package com.github.marivaldosena.mercadolivre.images;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,5 +1,7 @@
 package com.github.marivaldosena.mercadolivre.products;
 
+import com.github.marivaldosena.mercadolivre.images.ImageDto;
+
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;

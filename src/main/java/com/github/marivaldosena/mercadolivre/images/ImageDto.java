@@ -1,4 +1,4 @@
-package com.github.marivaldosena.mercadolivre.products;
+package com.github.marivaldosena.mercadolivre.images;
 
 public class ImageDto {
     private String image;

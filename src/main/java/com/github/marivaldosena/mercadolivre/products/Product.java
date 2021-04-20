@@ -2,6 +2,7 @@ package com.github.marivaldosena.mercadolivre.products;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.categories.Category;
+import com.github.marivaldosena.mercadolivre.images.ProductImage;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;

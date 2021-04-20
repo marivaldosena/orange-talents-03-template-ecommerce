@@ -1,6 +1,10 @@
-package com.github.marivaldosena.mercadolivre.products;
+package com.github.marivaldosena.mercadolivre.images;
 
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
+import com.github.marivaldosena.mercadolivre.products.Product;
+import com.github.marivaldosena.mercadolivre.products.ProductDto;
+import com.github.marivaldosena.mercadolivre.products.ProductNotFoundException;
+import com.github.marivaldosena.mercadolivre.products.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;

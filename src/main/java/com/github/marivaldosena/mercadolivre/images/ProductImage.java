@@ -1,5 +1,6 @@
-package com.github.marivaldosena.mercadolivre.products;
+package com.github.marivaldosena.mercadolivre.images;
 
+import com.github.marivaldosena.mercadolivre.products.Product;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
