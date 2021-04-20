@@ -13,13 +13,13 @@ public class AddOpinionRequest {
 
     @NotNull
     @Range(min = 1, max = 5)
-    private String review;
+    private Integer review;
 
     @NotNull
     @Size(min = 3, max = 500)
     private String description;
 
-    public AddOpinionRequest(String title, String review, String description) {
+    public AddOpinionRequest(String title, Integer review, String description) {
         this.title = title;
         this.review = review;
         this.description = description;
@@ -29,11 +29,15 @@ public class AddOpinionRequest {
         return title;
     }
 
-    public String getReview() {
+    public Integer getReview() {
         return review;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public Opinion toEntity() {
+        return new Opinion(title, review, description);
     }
 }

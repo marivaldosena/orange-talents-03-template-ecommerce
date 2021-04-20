@@ -3,7 +3,10 @@ package com.github.marivaldosena.mercadolivre.products;
 import com.github.marivaldosena.mercadolivre.images.ImageDto;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ProductDto {
@@ -15,6 +18,7 @@ public class ProductDto {
     private List<ProductDetailDto> details;
     private String category;
     private Set<ImageDto> images;
+    private List<OpinionDto> opinions;
 
     public ProductDto(Product product) {
         this.id = product.getId();
@@ -25,6 +29,7 @@ public class ProductDto {
         this.details = product.getDetails().stream().map(ProductDetailDto::new).collect(Collectors.toList());
         this.category = product.getCategory().getName();
         this.images = product.getImages().stream().map(ImageDto::new).collect(Collectors.toSet());
+        this.opinions = product.getOpinions().stream().map(OpinionDto::new).collect(Collectors.toList());
     }
 
     public UUID getId() {
@@ -53,6 +58,10 @@ public class ProductDto {
 
     public String getCategory() {
         return category;
+    }
+
+    public List<OpinionDto> getOpinions() {
+        return Collections.unmodifiableList(opinions);
     }
 
     public Set<ImageDto> getImages() {

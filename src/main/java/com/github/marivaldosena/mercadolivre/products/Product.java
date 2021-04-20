@@ -3,6 +3,7 @@ package com.github.marivaldosena.mercadolivre.products;
 import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.categories.Category;
 import com.github.marivaldosena.mercadolivre.images.ProductImage;
+import com.github.marivaldosena.mercadolivre.opinions.Opinion;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -10,10 +11,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -60,6 +58,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private Set<ProductImage> images;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private List<Opinion> opinions;
+
     /**
      * @deprecated Hibernate only;
      */
@@ -79,6 +80,8 @@ public class Product {
         this.quantity = quantity;
         this.description = description;
         this.details = new HashSet<>();
+        this.images = new HashSet<>();
+        this.opinions = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -119,6 +122,10 @@ public class Product {
 
     public Set<ProductImage> getImages() {
         return Collections.unmodifiableSet(images);
+    }
+
+    public List<Opinion> getOpinions() {
+        return Collections.unmodifiableList(opinions);
     }
 
     public void setDetails(Set<Characteristic> details) {

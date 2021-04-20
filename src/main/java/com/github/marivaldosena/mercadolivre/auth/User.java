@@ -1,5 +1,6 @@
 package com.github.marivaldosena.mercadolivre.auth;
 
+import com.github.marivaldosena.mercadolivre.opinions.Opinion;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -33,6 +35,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     private List<Product> products;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
+    private List<Opinion> opinions;
+
     @Transient
     private UserManager userManager;
 
@@ -51,6 +56,8 @@ public class User {
         this.userManager = new UserManager();
         this.email = email;
         this.password = this.userManager.hashPassword(password);
+        this.opinions = new ArrayList<>();
+        this.products = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -71,6 +78,10 @@ public class User {
 
     public List<Product> getProducts() {
         return Collections.unmodifiableList(products);
+    }
+
+    public List<Opinion> getOpinions() {
+        return Collections.unmodifiableList(opinions);
     }
 
     public void setNewPassword(String password) {
