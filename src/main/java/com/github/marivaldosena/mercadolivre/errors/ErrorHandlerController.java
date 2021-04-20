@@ -44,4 +44,11 @@ public class ErrorHandlerController {
 
         return new ErrorsListResponse(errors);
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ItemNotFoundException.class)
+    public ErrorsListResponse handle(ItemNotFoundException exception) {
+        ErrorDto error = new ErrorDto(exception.getErrorCode(), exception.getMessage());
+        return new ErrorsListResponse(List.of(error));
+    }
 }

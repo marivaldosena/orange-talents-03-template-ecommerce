@@ -1,9 +1,7 @@
 package com.github.marivaldosena.mercadolivre.products;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductDto {
@@ -14,6 +12,7 @@ public class ProductDto {
     private String description;
     private List<ProductDetailDto> details;
     private String category;
+    private Set<ImageDto> images;
 
     public ProductDto(Product product) {
         this.id = product.getId();
@@ -23,6 +22,7 @@ public class ProductDto {
         this.description = product.getDescription();
         this.details = product.getDetails().stream().map(ProductDetailDto::new).collect(Collectors.toList());
         this.category = product.getCategory().getName();
+        this.images = product.getImages().stream().map(ImageDto::new).collect(Collectors.toSet());
     }
 
     public UUID getId() {
@@ -51,5 +51,9 @@ public class ProductDto {
 
     public String getCategory() {
         return category;
+    }
+
+    public Set<ImageDto> getImages() {
+        return Collections.unmodifiableSet(images);
     }
 }

@@ -117,7 +117,7 @@ public class Product {
     }
 
     public Set<ProductImage> getImages() {
-        return images;
+        return Collections.unmodifiableSet(images);
     }
 
     public void setDetails(Set<Characteristic> details) {
