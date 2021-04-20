@@ -56,6 +56,7 @@ public class ProductImageController {
     }
 
     private void saveImageInServer(Product product, MultipartFile uploadedImage) {
+        // TODO: Refactor for using
         // Rename file with product identification for future deletion
         String newImageName = product.getId() + "-" + uploadedImage.getOriginalFilename();
         Path baseDirPath = Paths.get("").toAbsolutePath().getParent();

@@ -49,6 +49,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Alterações de Usuário logado cadastra novo produto](#alterações-de-usuário-logado-cadastra-novo-produto)
   - [Usuário logado adiciona imagem no seu produto](#usuário-logado-adiciona-imagem-no-seu-produto)
     - [Implementação de Usuário logado adiciona imagem no seu produto](#implementação-de-usuário-logado-adiciona-imagem-no-seu-produto)
+  - [Adicione uma opinião sobre um produto](#adicione-uma-opinião-sobre-um-produto)
   
 # Grade Curricular
 
@@ -307,5 +308,32 @@ Com um produto cadastrado, um usuário logado pode adicionar imagens ao seu prod
 Para armazenar imagens, é preciso criar uma entidade para armazenar uma lista de objetos a serem tradados pelo servidor. Esta entidade deve conter o nome do arquivo e o local de armazenamento.
 
 Para o armazenamento propriamente dito, no lado cliente, precisamos enviar o arquivo por intermédio de um formulário do tipo Multipart e, no lado servidor, precisamos obter os bytes do arquivo e escrevê-lo em disco ou outro meio de armazenamento, sendo o AWS S3 (ou similar) uma opção viável.
+
+[Voltar ao menu](#tópicos)
+
+## Adicione uma opinião sobre um produto
+
+Um usuário logado pode opinar sobre um produto. Claro que o melhor era que isso só pudesse ser feito depois da compra, mas podemos lidar com isso depois.
+
+### Necessidades
+
+- <span style="color: red;">&cross;</span> Tem uma nota que vai de 1 a 5
+- <span style="color: red;">&cross;</span> Tem um título. Ex: espetacular, horrível...
+- <span style="color: red;">&cross;</span> Tem uma descrição
+- <span style="color: red;">&cross;</span> O usuário logado que fez a pergunta (aqui pode usar usar o approach de definir um usuário na primeira linha do controller e depois trabalhar com o logado de verdade)
+- <span style="color: red;">&cross;</span> O produto que para o qual a pergunta foi direcionada
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> A restrição óbvia é que a nota é no mínimo 1 e no máximo 5
+- <span style="color: red;">&cross;</span> Título é obrigatório
+- <span style="color: red;">&cross;</span> Descrição é obrigatório e tem no máximo 500 caracteres
+- <span style="color: red;">&cross;</span> Usuário é obrigatório
+- <span style="color: red;">&cross;</span> O produto relacionado é obrigatório
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Uma nova opinião é criada e status 200 é retornado
+- <span style="color: red;">&cross;</span> Em caso de erro de validação, retorne 400 e o json com erros.
 
 [Voltar ao menu](#tópicos)
