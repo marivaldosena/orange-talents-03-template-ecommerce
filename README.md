@@ -287,18 +287,18 @@ Com um produto cadastrado, um usuário logado pode adicionar imagens ao seu prod
 
 ### Necessidades
 
-- <span style="color: red;">&cross;</span> Adicionar uma ou mais imagens a um determinado produto do próprio usuário
+- <span style="color: green;">&check;</span> Adicionar uma ou mais imagens a um determinado produto do próprio usuário
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> Tem uma ou mais fotos
-- <span style="color: red;">&cross;</span> Só pode adicionar fotos ao produto que pertence ao próprio usuário
+- <span style="color: green;">&check;</span> Tem uma ou mais fotos
+- <span style="color: green;">&check;</span> Só pode adicionar fotos ao produto que pertence ao próprio usuário
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Imagens adicionadas e 200 como retorno
-- <span style="color: red;">&cross;</span> Caso dê erro de validação retorne 400 e o json dos erros
-- <span style="color: red;">&cross;</span> Caso tente adicionar imagens a um produto que não é seu retorne 403.
+- <span style="color: green;">&check;</span> Imagens adicionadas e 200 como retorno
+- <span style="color: green;">&check;</span> Caso dê erro de validação retorne 400 e o json dos erros
+- <span style="color: green;">&check;</span> Caso tente adicionar imagens a um produto que não é seu retorne 403.
 
 [Voltar ao menu](#tópicos)
 
