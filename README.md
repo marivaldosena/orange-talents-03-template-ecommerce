@@ -50,6 +50,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Usuário logado adiciona imagem no seu produto](#usuário-logado-adiciona-imagem-no-seu-produto)
     - [Implementação de Usuário logado adiciona imagem no seu produto](#implementação-de-usuário-logado-adiciona-imagem-no-seu-produto)
   - [Adicione uma opinião sobre um produto](#adicione-uma-opinião-sobre-um-produto)
+    - [Implementação de Adicione uma opinião sobre um produto](#implementação-de-adicione-uma-opinião-sobre-um-produto)
   
 # Grade Curricular
 
@@ -335,5 +336,17 @@ Um usuário logado pode opinar sobre um produto. Claro que o melhor era que isso
 
 - <span style="color: red;">&cross;</span> Uma nova opinião é criada e status 200 é retornado
 - <span style="color: red;">&cross;</span> Em caso de erro de validação, retorne 400 e o json com erros.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Adicione uma opinião sobre um produto
+
+Para cadastrar a opinião do usuário a respeito de um produto, é necessário criar uma entidade para abstrair os detalhes de opinião.
+
+Esta entidade deve ter atributos para encapsular a nota que varia de 1 a 5, título, descrição e o usuário autenticado.
+
+A anotação para restrição de intervalo de notas é <code>@Size(min = 1, max = 5)</code>. Para obrigatoriedade de campos é <code>@Column(nullable = false)</code> para a entidade e <code>@NotNull</code> para o Form Value Object. Referente ao tamanho máximo de caracteres, podemos usar <code>@Size(max = 500)</code> para o Form Value e <code>@Column(length = 500)</code> para a entidade.
+
+Para obter as credenciais de usuário autenticado, devemos usar a anotação <code>@AuthenticationPrincipal</code> UserCredentials, pois a entidade UserCredentails implementa a interface UserDetails necessária para o usuário vigente.
 
 [Voltar ao menu](#tópicos)
