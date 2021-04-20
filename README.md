@@ -318,24 +318,24 @@ Um usuário logado pode opinar sobre um produto. Claro que o melhor era que isso
 
 ### Necessidades
 
-- <span style="color: red;">&cross;</span> Tem uma nota que vai de 1 a 5
-- <span style="color: red;">&cross;</span> Tem um título. Ex: espetacular, horrível...
-- <span style="color: red;">&cross;</span> Tem uma descrição
-- <span style="color: red;">&cross;</span> O usuário logado que fez a pergunta (aqui pode usar usar o approach de definir um usuário na primeira linha do controller e depois trabalhar com o logado de verdade)
-- <span style="color: red;">&cross;</span> O produto que para o qual a pergunta foi direcionada
+- <span style="color: green;">&check;</span> Tem uma nota que vai de 1 a 5
+- <span style="color: green;">&check;</span> Tem um título. Ex: espetacular, horrível...
+- <span style="color: green;">&check;</span> Tem uma descrição
+- <span style="color: green;">&check;</span> O usuário logado que fez a pergunta (aqui pode usar usar o approach de definir um usuário na primeira linha do controller e depois trabalhar com o logado de verdade)
+- <span style="color: green;">&check;</span> O produto que para o qual a pergunta foi direcionada
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> A restrição óbvia é que a nota é no mínimo 1 e no máximo 5
-- <span style="color: red;">&cross;</span> Título é obrigatório
-- <span style="color: red;">&cross;</span> Descrição é obrigatório e tem no máximo 500 caracteres
-- <span style="color: red;">&cross;</span> Usuário é obrigatório
-- <span style="color: red;">&cross;</span> O produto relacionado é obrigatório
+- <span style="color: green;">&check;</span> A restrição óbvia é que a nota é no mínimo 1 e no máximo 5
+- <span style="color: green;">&check;</span> Título é obrigatório
+- <span style="color: green;">&check;</span> Descrição é obrigatório e tem no máximo 500 caracteres
+- <span style="color: green;">&check;</span> Usuário é obrigatório
+- <span style="color: green;">&check;</span> O produto relacionado é obrigatório
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Uma nova opinião é criada e status 200 é retornado
-- <span style="color: red;">&cross;</span> Em caso de erro de validação, retorne 400 e o json com erros.
+- <span style="color: green;">&check;</span> Uma nova opinião é criada e status 200 é retornado
+- <span style="color: green;">&check;</span> Em caso de erro de validação, retorne 400 e o json com erros.
 
 [Voltar ao menu](#tópicos)
 
