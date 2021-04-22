@@ -51,6 +51,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Usuário logado adiciona imagem no seu produto](#implementação-de-usuário-logado-adiciona-imagem-no-seu-produto)
   - [Adicione uma opinião sobre um produto](#adicione-uma-opinião-sobre-um-produto)
     - [Implementação de Adicione uma opinião sobre um produto](#implementação-de-adicione-uma-opinião-sobre-um-produto)
+  - [Faça uma pergunta](#faça-uma-pergunta)
   
 # Grade Curricular
 
@@ -348,5 +349,31 @@ Esta entidade deve ter atributos para encapsular a nota que varia de 1 a 5, tít
 A anotação para restrição de intervalo de notas é <code>@Size(min = 1, max = 5)</code>. Para obrigatoriedade de campos é <code>@Column(nullable = false)</code> para a entidade e <code>@NotNull</code> para o Form Value Object. Referente ao tamanho máximo de caracteres, podemos usar <code>@Size(max = 500)</code> para o Form Value e <code>@Column(length = 500)</code> para a entidade.
 
 Para obter as credenciais de usuário autenticado, devemos usar a anotação <code>@AuthenticationPrincipal</code> UserCredentials, pois a entidade UserCredentails implementa a interface UserDetails necessária para o usuário vigente.
+
+[Voltar ao menu](#tópicos)
+
+## Faça uma pergunta
+
+Um usuário logado pode fazer uma pergunta sobre o produto
+
+### Necessidades
+
+- <span style="color: red;">&cross;</span> A pergunta tem um título
+- <span style="color: red;">&cross;</span> Tem instante de criação
+- <span style="color: red;">&cross;</span> O usuário que fez a pergunta
+- <span style="color: red;">&cross;</span> O produto relacionado a pergunta
+- <span style="color: red;">&cross;</span> O vendedor recebe um email com a pergunta nova
+- <span style="color: red;">&cross;</span> O email não precisa ser de verdade. Pode ser apenas um print no console do servidor com o corpo.
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> O título é obrigatório
+- <span style="color: red;">&cross;</span> O produto é obrigatório
+- <span style="color: red;">&cross;</span> O usuário é obrigatório
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Uma nova pergunta é criada e é retornada. Status 200
+- <span style="color: red;">&cross;</span> Em caso de erro de validação, retorne 400 e o json com erros.
 
 [Voltar ao menu](#tópicos)
