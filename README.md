@@ -16,6 +16,7 @@
 [projeto-casa-do-codigo-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo
 [projeto-casa-do-codigo-email-unico-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo#implementação-do-cadastro-de-email-único
 [mercado-livre-produto-detalhes-url]: https://produto.mercadolivre.com.br/MLB-1279370191-bebedouro-bomba-eletrica-p-garrafo-galo-agua-recarregavel-_JM?variation=48969374724#reco_item_pos=0&reco_backend=navigation&reco_backend_type=function&reco_client=home_navigation-recommendations&reco_id=e55bf74a-9551-42d8-a43d-fb64fa3117d4&c_id=/home/navigation-recommendations/element&c_element_order=1&c_uid=761d5d17-5baf-4fd8-be79-fc65ee66a6fb
+[hibernate-interceptadores-e-eventos-url]: https://docs.jboss.org/hibernate/stable/orm/userguide/html_single/Hibernate_User_Guide.html#events
 
 <!-- Conteúdo -->
 # Zup Orange Talents | Desafio Mercado Livre
@@ -52,6 +53,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Adicione uma opinião sobre um produto](#adicione-uma-opinião-sobre-um-produto)
     - [Implementação de Adicione uma opinião sobre um produto](#implementação-de-adicione-uma-opinião-sobre-um-produto)
   - [Faça uma pergunta](#faça-uma-pergunta)
+    - [Implementação de Faça uma pergunta](#implementação-de-faça-uma-pergunta)
   
 # Grade Curricular
 
@@ -375,5 +377,39 @@ Um usuário logado pode fazer uma pergunta sobre o produto
 
 - <span style="color: red;">&cross;</span> Uma nova pergunta é criada e é retornada. Status 200
 - <span style="color: red;">&cross;</span> Em caso de erro de validação, retorne 400 e o json com erros.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Faça uma pergunta
+
+Para permitir que um usuário questione sobre mais detalhes a respeito de um produto, é necessário criar uma entidade para conter todos os questionamentos e outra para as respostas desse questionamento.
+
+Como são dois usuários, sendo um o anunciante do produto e o outro o comprador em potencial, será necessário trabalhar com autorização para impedir que o anunciante faça uma pergunta a respeito do próprio produto e, no caso do comprador em potencial, impedir que responda a questionamentos a respeito de um produto o qual não é o anunciante.
+
+A entidade para questionamentos deve conter:
+
+- título obrigatório do tipo String
+- instante de criação do tipo LocalDateTime
+- referência ao questionante do tipo String para UUID
+- referência ao produto do tipo String para UUID
+
+As anotações para obrigatoriedade são: <code>@NotNull</code> no Form Value Object e <code>@Column(nullable = false)</code> para a entidade.
+Para o instante de criação é <code>@CreationTimestamp</code>.
+
+O relacionamento entre a entidade de questionamento e produtos e/ou usuários deve ser do tipo muitos-para-um, ou seja, um usuário pode fazer diversas perguntas a respeito de um produto e um produto pode ter muitos questionamentos. Aqui é importante notar que um usuário pode questionar mais de uma vez a respeito de um produto, no entanto, esse questionamento não deve conter o mesmo título para caracterizá-lo como novo.
+
+As anotações usadas para os relacionamentos são: na entidade para questionamentos, <code>@ManyToOne</code> nos atributos de produto e usuário e, nas entidades produto e usuário, <code>@OneToMany</code> para o atributo do tipo lista de questionamentos.
+
+Acredito que seja interessante criar uma interface para abstrair os detalhes de implementação do envio de e-mail. Dessa forma, será mais fácil mudar a implementação ou testá-la com objetos do tipo Mock.
+
+Outro ponto que é interessante abordar é a utilização de interceptadores e eventos do Hibernate. Com a utilização deles é possível enviar o e-mail somente após a operação  de persistência de dados ter obtido êxito. Caso contrário, o e-mail não será enviado.
+
+Dessa forma, conseguimos desacoplar a entidade de questionamentos do envio de e-mail por intermédio de delegação, ou seja, usamos a associação de objetos do tipo agregação para encapsular os detalhes de envio. No entanto, o ponto negativo será o aumento de complexidade de código.
+
+Para obter mais informações a respeito de interceptadores e eventos, sugiro ir em [Interceptadores e Eventos do Hibernate][hibernate-interceptadores-e-eventos-url].
+
+Para entidade de respostas, é necessário termos uma referência ao questionamento e outro atributo para a resposta propriamente dita.
+
+Devemos criar dois repositórios: uma para questionamentos e outro para repostas. Dois controladores para lidar com as requisições de ambos.
 
 [Voltar ao menu](#tópicos)
