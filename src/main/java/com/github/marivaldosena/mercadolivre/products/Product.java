@@ -4,6 +4,7 @@ import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.categories.Category;
 import com.github.marivaldosena.mercadolivre.images.ProductImage;
 import com.github.marivaldosena.mercadolivre.opinions.Opinion;
+import com.github.marivaldosena.mercadolivre.questions.Question;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -61,6 +62,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private List<Opinion> opinions;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private List<Question> questions;
+
     /**
      * @deprecated Hibernate only;
      */
@@ -82,6 +86,7 @@ public class Product {
         this.details = new HashSet<>();
         this.images = new HashSet<>();
         this.opinions = new ArrayList<>();
+        this.questions = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -126,6 +131,10 @@ public class Product {
 
     public List<Opinion> getOpinions() {
         return Collections.unmodifiableList(opinions);
+    }
+
+    public List<Question> getQuestions() {
+        return Collections.unmodifiableList(questions);
     }
 
     public void setDetails(Set<Characteristic> details) {

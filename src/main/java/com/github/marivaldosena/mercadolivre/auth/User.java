@@ -2,6 +2,7 @@ package com.github.marivaldosena.mercadolivre.auth;
 
 import com.github.marivaldosena.mercadolivre.opinions.Opinion;
 import com.github.marivaldosena.mercadolivre.products.Product;
+import com.github.marivaldosena.mercadolivre.questions.Question;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -38,6 +39,9 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
     private List<Opinion> opinions;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
+    private List<Question> questions;
+
     @Transient
     private UserManager userManager;
 
@@ -48,8 +52,7 @@ public class User {
     }
 
     /**
-     *
-     * @param email User's e-mail.
+     *  @param email User's e-mail.
      * @param password Login password.
      */
     public User(String email, String password) {
@@ -58,6 +61,7 @@ public class User {
         this.password = this.userManager.hashPassword(password);
         this.opinions = new ArrayList<>();
         this.products = new ArrayList<>();
+        this.questions = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -82,6 +86,10 @@ public class User {
 
     public List<Opinion> getOpinions() {
         return Collections.unmodifiableList(opinions);
+    }
+
+    public List<Question> getQuestions() {
+        return Collections.unmodifiableList(questions);
     }
 
     public void setNewPassword(String password) {
