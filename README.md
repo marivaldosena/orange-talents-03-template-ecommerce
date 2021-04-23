@@ -61,6 +61,9 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Faça uma pergunta](#implementação-de-faça-uma-pergunta)
     - [Sugestões a respeito de Faça uma pergunta](#sugestões-a-respeito-de-faça-uma-pergunta)
   - [Página de detalhes](#página-de-detalhes)
+    - [Implementação de Página de detalhes
+](#implementação-de-página-de-detalhes
+)
   
 # Grade Curricular
 
@@ -440,14 +443,20 @@ Não temos todas as informações, mas já temos bastante coisa. Faça, do jeito
 
 ### Informações que já temos como retornar
 
-- Links para imagens
-- Nome do produto
-- Preço do produto
-- Características do produto
-- Des​crição do produto
-- Média de notas do produto
-- Número total de notas do produto
-- Opiniões sobre o produto
-- Perguntas para aquele produto
+- <span style="color: green;">&check;</span> Links para imagens
+- <span style="color: green;">&check;</span> Nome do produto
+- <span style="color: green;">&check;</span> Preço do produto
+- <span style="color: green;">&check;</span> Características do produto
+- <span style="color: green;">&check;</span> Des​crição do produto
+- <span style="color: green;">&check;</span> Média de notas do produto
+- <span style="color: green;">&check;</span> Número total de notas do produto
+- <span style="color: green;">&check;</span> Opiniões sobre o produto
+- <span style="color: green;">&check;</span> Perguntas para aquele produto
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Página de detalhes
+
+Criaria um DTO para disponibilizar as informações solicitadas e um endpoint que poderia ser no mesmo controlador de cadastro de produto.
 
 [Voltar ao menu](#tópicos)

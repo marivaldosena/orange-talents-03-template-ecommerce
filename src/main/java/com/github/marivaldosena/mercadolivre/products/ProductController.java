@@ -5,15 +5,14 @@ import com.github.marivaldosena.mercadolivre.categories.Category;
 import com.github.marivaldosena.mercadolivre.categories.CategoryRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(ProductController.RESOURCE_URL)
@@ -25,6 +24,17 @@ public class ProductController {
     public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductWithFullDetailsDto> getDetailsFor(@PathVariable("id") UUID productId) {
+        Optional<Product> existingProduct = productRepository.findById(productId);
+
+        if (!existingProduct.isPresent()) {
+            throw new ProductNotFoundException("Product not found");
+        }
+
+        return ResponseEntity.ok(new ProductWithFullDetailsDto(existingProduct.get()));
     }
 
     @PostMapping
