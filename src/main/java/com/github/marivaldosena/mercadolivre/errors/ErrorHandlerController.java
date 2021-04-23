@@ -45,6 +45,13 @@ public class ErrorHandlerController {
         return new ErrorsListResponse(errors);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CustomErrorException.class)
+    public ErrorsListResponse handle(CustomErrorException exception) {
+        ErrorDto error = new ErrorDto(exception.getErrorCode(), exception.getMessage());
+        return new ErrorsListResponse(List.of(error));
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ItemNotFoundException.class)
     public ErrorsListResponse handle(ItemNotFoundException exception) {

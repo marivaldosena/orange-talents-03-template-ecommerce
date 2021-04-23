@@ -1,6 +1,8 @@
 package com.github.marivaldosena.mercadolivre.questions;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
+import com.github.marivaldosena.mercadolivre.emails.GenericEmailSender;
+import com.github.marivaldosena.mercadolivre.emails.MockConsoleEmailSender;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -28,11 +30,11 @@ public class Question {
     private LocalDateTime creationDate;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_user_id"))
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_question_user_id"))
     private User author;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name = "fk_product_id"))
+    @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name = "fk_question_product_id"))
     private Product product;
 
     /**
@@ -47,11 +49,15 @@ public class Question {
         this.product = product;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public String getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -61,5 +67,11 @@ public class Question {
 
     public Product getProduct() {
         return product;
+    }
+
+    @PostPersist
+    private void sendEmail() {
+        GenericEmailSender emailSender = new MockConsoleEmailSender();
+        emailSender.sendEmail(product.getUser(), "Question for " + product.getName(), title, author);
     }
 }
