@@ -17,6 +17,10 @@
 [projeto-casa-do-codigo-email-unico-url]: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo#implementação-do-cadastro-de-email-único
 [mercado-livre-produto-detalhes-url]: https://produto.mercadolivre.com.br/MLB-1279370191-bebedouro-bomba-eletrica-p-garrafo-galo-agua-recarregavel-_JM?variation=48969374724#reco_item_pos=0&reco_backend=navigation&reco_backend_type=function&reco_client=home_navigation-recommendations&reco_id=e55bf74a-9551-42d8-a43d-fb64fa3117d4&c_id=/home/navigation-recommendations/element&c_element_order=1&c_uid=761d5d17-5baf-4fd8-be79-fc65ee66a6fb
 [hibernate-interceptadores-e-eventos-url]: https://docs.jboss.org/hibernate/stable/orm/userguide/html_single/Hibernate_User_Guide.html#events
+[blog-domine-o-spring-url]: https://domineospring.wordpress.com/2015/06/08/lidando-com-eventos-dentro-do-spring/
+[blog-baeldung-url]: https://www.baeldung.com/spring-events
+[blog-reflactoring-url]: https://reflectoring.io/spring-boot-application-events-explained/#:~:text=Spring%20application%20events%20allow%20us%20to%20throw%20and,modify%20subscribers%20without%20affecting%20the%20publishers%20and%20vice-versa
+[spring-doc-eventos-url]: https://docs.spring.io/spring-integration/reference/html/event.html
 
 <!-- Conteúdo -->
 # Zup Orange Talents | Desafio Mercado Livre
@@ -54,6 +58,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Adicione uma opinião sobre um produto](#implementação-de-adicione-uma-opinião-sobre-um-produto)
   - [Faça uma pergunta](#faça-uma-pergunta)
     - [Implementação de Faça uma pergunta](#implementação-de-faça-uma-pergunta)
+    - [Sugestões a respeito de Faça uma pergunta](#sugestões-a-respeito-de-faça-uma-pergunta)
   
 # Grade Curricular
 
@@ -360,23 +365,23 @@ Um usuário logado pode fazer uma pergunta sobre o produto
 
 ### Necessidades
 
-- <span style="color: red;">&cross;</span> A pergunta tem um título
-- <span style="color: red;">&cross;</span> Tem instante de criação
-- <span style="color: red;">&cross;</span> O usuário que fez a pergunta
-- <span style="color: red;">&cross;</span> O produto relacionado a pergunta
-- <span style="color: red;">&cross;</span> O vendedor recebe um email com a pergunta nova
-- <span style="color: red;">&cross;</span> O email não precisa ser de verdade. Pode ser apenas um print no console do servidor com o corpo.
+- <span style="color: green;">&check;</span> A pergunta tem um título
+- <span style="color: green;">&check;</span> Tem instante de criação
+- <span style="color: green;">&check;</span> O usuário que fez a pergunta
+- <span style="color: green;">&check;</span> O produto relacionado a pergunta
+- <span style="color: green;">&check;</span> O vendedor recebe um email com a pergunta nova
+- <span style="color: green;">&check;</span> O email não precisa ser de verdade. Pode ser apenas um print no console do servidor com o corpo.
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> O título é obrigatório
-- <span style="color: red;">&cross;</span> O produto é obrigatório
-- <span style="color: red;">&cross;</span> O usuário é obrigatório
+- <span style="color: green;">&check;</span> O título é obrigatório
+- <span style="color: green;">&check;</span> O produto é obrigatório
+- <span style="color: green;">&check;</span> O usuário é obrigatório
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Uma nova pergunta é criada e é retornada. Status 200
-- <span style="color: red;">&cross;</span> Em caso de erro de validação, retorne 400 e o json com erros.
+- <span style="color: green;">&check;</span> Uma nova pergunta é criada e é retornada. Status 200
+- <span style="color: green;">&check;</span> Em caso de erro de validação, retorne 400 e o json com erros.
 
 [Voltar ao menu](#tópicos)
 
@@ -411,5 +416,16 @@ Para obter mais informações a respeito de interceptadores e eventos, sugiro ir
 Para entidade de respostas, é necessário termos uma referência ao questionamento e outro atributo para a resposta propriamente dita.
 
 Devemos criar dois repositórios: uma para questionamentos e outro para repostas. Dois controladores para lidar com as requisições de ambos.
+
+[Voltar ao menu](#tópicos)
+
+
+### Sugestões a respeito de Faça uma pergunta
+
+Durante o desenvolvimento, tive algumas ideias a respeito de implementação e optei pelo uso da anotação <code>@PostPersist</code> para que, assim que a pergunta fosse persistida em banco de dados, o e-mail seja enviado. No entanto, essa solução possui alto acomplamento, já que a implementação está na própria entidade de perguntas.
+
+Há outras alternativas mais elegantes para este problema. Um deles é permitir que o uso de Injeção de Dependência por intermédio de <code>@Component</code> e <code>@Primary</code>. Além dessa, há o uso de uma classe específica no Spring: a ApplicationEvent. Outra possível é a anotação <code>@EventListener</code>.
+
+Para obter mais detalhes e inspiração das alternativas possíveis, você pode consultar os seguintes links: [Lidando com eventos dentro do Spring][blog-domine-o-spring-url], [Spring Events][blog-baeldung-url], [Spring Boot Application Events Explained][blog-reflactoring-url] e, por último e não menos importante, [a documentação oficial do Spring][spring-doc-eventos-url].
 
 [Voltar ao menu](#tópicos)
