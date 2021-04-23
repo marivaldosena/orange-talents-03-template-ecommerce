@@ -1,6 +1,4 @@
-package com.github.marivaldosena.mercadolivre.products;
-
-import com.github.marivaldosena.mercadolivre.opinions.Opinion;
+package com.github.marivaldosena.mercadolivre.opinions;
 
 public class OpinionDto {
     private String title;

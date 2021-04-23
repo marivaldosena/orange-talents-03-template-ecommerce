@@ -1,6 +1,7 @@
 package com.github.marivaldosena.mercadolivre.products;
 
 import com.github.marivaldosena.mercadolivre.images.ImageDto;
+import com.github.marivaldosena.mercadolivre.opinions.OpinionDto;
 
 import java.math.BigDecimal;
 import java.util.Collections;

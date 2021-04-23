@@ -21,6 +21,7 @@
 [blog-baeldung-url]: https://www.baeldung.com/spring-events
 [blog-reflactoring-url]: https://reflectoring.io/spring-boot-application-events-explained/#:~:text=Spring%20application%20events%20allow%20us%20to%20throw%20and,modify%20subscribers%20without%20affecting%20the%20publishers%20and%20vice-versa
 [spring-doc-eventos-url]: https://docs.spring.io/spring-integration/reference/html/event.html
+[mercado-livre-produto-detalhes-variacao-url]: https://produto.mercadolivre.com.br/MLB-1279370191-bebedouro-bomba-eletrica-p-garrafo-galo-agua-recarregavel-_JM?quantity=1&variation=49037204722&onAttributesExp=true
 
 <!-- Conteúdo -->
 # Zup Orange Talents | Desafio Mercado Livre
@@ -59,6 +60,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Faça uma pergunta](#faça-uma-pergunta)
     - [Implementação de Faça uma pergunta](#implementação-de-faça-uma-pergunta)
     - [Sugestões a respeito de Faça uma pergunta](#sugestões-a-respeito-de-faça-uma-pergunta)
+  - [Página de detalhes](#página-de-detalhes)
   
 # Grade Curricular
 
@@ -427,5 +429,25 @@ Durante o desenvolvimento, tive algumas ideias a respeito de implementação e o
 Há outras alternativas mais elegantes para este problema. Um deles é permitir que o uso de Injeção de Dependência por intermédio de <code>@Component</code> e <code>@Primary</code>. Além dessa, há o uso de uma classe específica no Spring: a ApplicationEvent. Outra possível é a anotação <code>@EventListener</code>.
 
 Para obter mais detalhes e inspiração das alternativas possíveis, você pode consultar os seguintes links: [Lidando com eventos dentro do Spring][blog-domine-o-spring-url], [Spring Events][blog-baeldung-url], [Spring Boot Application Events Explained][blog-reflactoring-url] e, por último e não menos importante, [a documentação oficial do Spring][spring-doc-eventos-url].
+
+[Voltar ao menu](#tópicos)
+
+## Página de detalhes
+
+O front precisa montar essa página do [Mercado Livre][mercado-livre-produto-detalhes-variacao-url].
+
+Não temos todas as informações, mas já temos bastante coisa. Faça, do jeito que achar melhor o código necessário para que o endpoint retorne as informações para que o front monte a página.
+
+### Informações que já temos como retornar
+
+- Links para imagens
+- Nome do produto
+- Preço do produto
+- Características do produto
+- Des​crição do produto
+- Média de notas do produto
+- Número total de notas do produto
+- Opiniões sobre o produto
+- Perguntas para aquele produto
 
 [Voltar ao menu](#tópicos)
