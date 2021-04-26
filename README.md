@@ -64,6 +64,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Página de detalhes
 ](#implementação-de-página-de-detalhes
 )
+  - [Primeira parte do processo de compras](#primeira-parte-do-processo-de-compras)
   
 # Grade Curricular
 
@@ -458,5 +459,44 @@ Não temos todas as informações, mas já temos bastante coisa. Faça, do jeito
 ### Implementação de Página de detalhes
 
 Criaria um DTO para disponibilizar as informações solicitadas e um endpoint que poderia ser no mesmo controlador de cadastro de produto.
+
+[Voltar ao menu](#tópicos)
+
+## Primeira parte do processo de compras
+
+Aqui a gente vai simular uma integração com um gateway como paypal, pagseguro etc. O fluxo geralmente é o seguinte:
+
+- O sistema registra uma nova compra e gera um identificador de compra que pode ser passado como argumento para o gateway.
+- O cliente efetua o pagamento no gateway
+- O gateway invoca uma url do sistema passando o identificador de compra do próprio sistema e as informações relativas a transação em si.
+
+Então essa é a parte 1 do processo de finalização de compra. Onde apenas geramos a compra no sistema. Não precisamos da noção de um carrinho compra. Apenas temos o usuário logado comprando um produto.
+
+### Necessidades
+
+- A pessoa pode escolher a quantidade de itens daquele produto que ela quer comprar
+- O estoque do produto é abatido 
+- Um email é enviado para a pessoa que é dona(o) do produto informando que um usuário realmente disse que queria comprar seu produto.
+- Uma compra é gerada informando o status INICIADA e com as seguintes informações:
+  - gateway escolhido para pagamento
+  - produto escolhido
+  - quantidade
+  - comprador(a)
+  - Valor do produto naquele momento
+- Suponha que o cliente pode escolher entre pagar com o Paypal ou Pagseguro.
+
+### Restrições
+
+- A quantidade é obrigatória
+- A quantidade é positiva
+- Precisa ter estoque para realizar a compra
+
+### Resultado esperado
+
+- Caso a pessoa escolha o paypal seu endpoint deve gerar o seguinte redirect(302):
+  - Retorne o endereço da seguinte maneira: <code>paypal.com?buyerId={idGeradoDaCompra}&redirectUrl={urlRetornoAppPosPagamento}</code>
+- Caso a pessoa escolha o pagseguro o seu endpoint deve gerar o seguinte redirect(302):
+  - Retorne o endereço da seguinte maneira: </code>pagseguro.com?returnId={idGeradoDaCompra}&redirectUrl={urlRetornoAppPosPagamento}</code>
+- Caso aconteça alguma restrição retorne um status 400 informando os problemas. 
 
 [Voltar ao menu](#tópicos)
