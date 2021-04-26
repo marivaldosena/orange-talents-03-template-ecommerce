@@ -65,6 +65,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 ](#implementação-de-página-de-detalhes
 )
   - [Primeira parte do processo de compras](#primeira-parte-do-processo-de-compras)
+    - [Implementação de Primeira parte do processo de compras](#implementação-de-primeira-parte-do-processo-de-compras)
   
 # Grade Curricular
 
@@ -498,5 +499,21 @@ Então essa é a parte 1 do processo de finalização de compra. Onde apenas ger
 - Caso a pessoa escolha o pagseguro o seu endpoint deve gerar o seguinte redirect(302):
   - Retorne o endereço da seguinte maneira: </code>pagseguro.com?returnId={idGeradoDaCompra}&redirectUrl={urlRetornoAppPosPagamento}</code>
 - Caso aconteça alguma restrição retorne um status 400 informando os problemas. 
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Primeira parte do processo de compras
+
+Para a atividade de compra de produtos, devemos criar uma entidade para armazenar os dados.
+
+A entidade de compra deve conter os seguintes atributos:
+
+- produto para fazer referência ao produto adquirido. Também podemos usar uma lista de produtos para referenciar vários adquiridos na mesma compra. Como o enunciado não especifica qual é a forma pretendida de modo explícito, manterei como único neste momento, pois é o que inferi pelo quarto item da seção Necessidades.
+- status do tipo StatusProdutoEnum para armazenar o status da compra. Os status podem ser iniciada, finalizada ou cancelada. É possível ter outros tipos de status, tais como: pendente de pagamento, produtos indisponíveis, pendente de entrega, entre outros. No entanto, está mais relacionada ao status de entrega de produto e, acredito eu, que os status aqui definidos devem estar relacionados ao status de pagamento.
+- gateway de pagamento, ou seja, qual foi o serviço de pagamento utilizado. Neste caso, usamos apenas o PayPal e o PagSeguro.
+
+Há algumas coisas que podemos fazer para ampliar este exercício e o torná-lo mais real, tal como inserir o conceito de estoque como entidade separada para acompanhar a evolução e o histórico de entrada e saída de produtos. No entanto, aumentará a complexidade além de não estar no escopo da atividade.
+
+Para fazer requisições a serviços externos, teremos que utilizar o Feign, pois é uma das dependências obrigatórias do projeto.
 
 [Voltar ao menu](#tópicos)
