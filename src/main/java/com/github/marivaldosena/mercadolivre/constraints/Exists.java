@@ -13,6 +13,6 @@ public @interface Exists {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     Class<?> entity();
-    String field();
+    String[] fields();
     boolean required() default true;
 }

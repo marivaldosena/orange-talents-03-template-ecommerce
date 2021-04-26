@@ -36,7 +36,7 @@ public class CreateProductRequest {
     private Set<ProductDetailRequest> characteristics;
 
     @NotNull
-    @Exists(entity = Category.class, field = "name")
+    @Exists(entity = Category.class, fields = {"name"})
     private String category;
 
     public CreateProductRequest(String product, BigDecimal price, Integer quantity, String description, String category) {

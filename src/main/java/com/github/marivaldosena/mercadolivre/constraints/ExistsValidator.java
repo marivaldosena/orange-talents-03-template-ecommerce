@@ -12,7 +12,7 @@ public class ExistsValidator implements ConstraintValidator<Exists, String> {
     private EntityManager manager;
 
     Class<?> entity;
-    String fieldName;
+    String[] fieldNames;
     boolean isRequired;
 
     @Override
@@ -22,7 +22,14 @@ public class ExistsValidator implements ConstraintValidator<Exists, String> {
             return true;
         }
 
-        String jpql = "SELECT 1 FROM " + entity.getName() + " WHERE LOWER(" + fieldName + ") = LOWER(:value)";
+        String jpql = "SELECT 1 FROM " + entity.getName() + " WHERE ";
+
+        for (String field : fieldNames) {
+            jpql = jpql + "LOWER(" + field + ") = LOWER(:value) OR ";
+        }
+
+        jpql = jpql.substring(0, jpql.length() - 3);
+
         Query query = manager.createQuery(jpql);
         query.setParameter("value", value);
         List<?> result = query.getResultList();
@@ -32,7 +39,7 @@ public class ExistsValidator implements ConstraintValidator<Exists, String> {
     @Override
     public void initialize(Exists constraint) {
         this.entity = constraint.entity();
-        this.fieldName = constraint.field();
+        this.fieldNames = constraint.fields();
         this.isRequired = constraint.required();
     }
 }

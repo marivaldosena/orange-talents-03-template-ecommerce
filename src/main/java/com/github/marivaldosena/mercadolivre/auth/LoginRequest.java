@@ -12,7 +12,7 @@ public class LoginRequest {
     @NotNull
     @NotEmpty
     @Email
-    @Exists(entity = User.class, field = "email")
+    @Exists(entity = User.class, fields = {"email"})
     private String email;
 
     @NotNull
