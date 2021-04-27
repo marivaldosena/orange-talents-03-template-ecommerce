@@ -148,4 +148,8 @@ public class Product {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public boolean isCurrentUserTheOwner(User currentUser) {
+        return this.getUser().getEmail().compareTo(currentUser.getEmail()) == 0;
+    }
 }

@@ -58,4 +58,11 @@ public class ErrorHandlerController {
         ErrorDto error = new ErrorDto(exception.getErrorCode(), exception.getMessage());
         return new ErrorsListResponse(List.of(error));
     }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AuthorizationException.class)
+    public ErrorsListResponse handle(AuthorizationException exception) {
+        ErrorDto error = new ErrorDto(exception.getErrorCode(), exception.getMessage());
+        return new ErrorsListResponse(List.of(error));
+    }
 }

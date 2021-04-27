@@ -1,6 +1,7 @@
 package com.github.marivaldosena.mercadolivre.images;
 
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
+import com.github.marivaldosena.mercadolivre.errors.InvalidOwnershipException;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import com.github.marivaldosena.mercadolivre.products.ProductDto;
 import com.github.marivaldosena.mercadolivre.products.ProductNotFoundException;
@@ -48,6 +49,10 @@ public class ProductImageController {
             throw new ProductNotFoundException("Product not found");
         }
 
+        if (!product.get().isCurrentUserTheOwner(userCredentials.toEntity())) {
+            throw new InvalidOwnershipException("Current user is not the owner of this product");
+        }
+
         request.getImages().forEach(img -> {
             ProductImage prodImage = new ProductImage(img.getOriginalFilename(), img.getSize(), product.get());
             productImages.add(prodImage);
@@ -59,7 +64,6 @@ public class ProductImageController {
     }
 
     private void saveImageInServer(Product product, MultipartFile uploadedImage) {
-        // TODO: Refactor for using
         // Rename file with product identification for future deletion
         String newImageName = product.getId() + "-" + uploadedImage.getOriginalFilename();
         Path baseDirPath = Paths.get("").toAbsolutePath().getParent();

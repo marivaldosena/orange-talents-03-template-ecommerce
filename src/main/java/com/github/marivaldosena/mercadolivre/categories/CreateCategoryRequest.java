@@ -13,7 +13,7 @@ public class CreateCategoryRequest {
     @Unique(entity = Category.class, field = "name")
     private String category;
 
-    @Exists(entity = Category.class, field = "name", required = false)
+    @Exists(entity = Category.class, fields = {"name"}, required = false)
     private String parentCategory;
 
     @JsonCreator

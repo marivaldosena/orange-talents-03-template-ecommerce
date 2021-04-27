@@ -1,7 +1,7 @@
 package com.github.marivaldosena.mercadolivre.questions;
 
-import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
+import com.github.marivaldosena.mercadolivre.errors.InvalidOwnershipException;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import com.github.marivaldosena.mercadolivre.products.ProductNotFoundException;
 import com.github.marivaldosena.mercadolivre.products.ProductRepository;
@@ -48,8 +48,8 @@ public class QuestionController {
             throw new InvalidQuestionException("A similar question was already asked by the user for this product");
         }
 
-        if (isCurrentUserSameProductAuthor(existingProduct.get().getUser(), userCredentials)) {
-            throw new InvalidQuestionException("Product's author cannot ask about one's own product");
+        if (existingProduct.get().isCurrentUserTheOwner(userCredentials.toEntity())) {
+            throw new InvalidOwnershipException("Product's author cannot ask about one's own product");
         }
 
         questionRepository.save(question);
@@ -68,9 +68,5 @@ public class QuestionController {
         }
 
         return false;
-    }
-
-    private boolean isCurrentUserSameProductAuthor(User author, UserCredentials currentUser) {
-        return author.getEmail().compareTo(currentUser.getUsername()) == 0;
     }
 }
