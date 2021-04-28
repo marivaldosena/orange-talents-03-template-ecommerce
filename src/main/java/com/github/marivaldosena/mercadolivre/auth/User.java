@@ -2,6 +2,8 @@ package com.github.marivaldosena.mercadolivre.auth;
 
 import com.github.marivaldosena.mercadolivre.opinions.Opinion;
 import com.github.marivaldosena.mercadolivre.products.Product;
+import com.github.marivaldosena.mercadolivre.purchases.Purchase;
+import com.github.marivaldosena.mercadolivre.purchases.PurchaseItem;
 import com.github.marivaldosena.mercadolivre.questions.Question;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -42,6 +44,12 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
     private List<Question> questions;
 
+    @OneToMany(mappedBy = "buyer")
+    private List<Purchase> purchases;
+
+    @OneToMany(mappedBy = "seller")
+    private List<PurchaseItem> soldItems;
+
     @Transient
     private UserManager userManager;
 
@@ -62,6 +70,8 @@ public class User {
         this.opinions = new ArrayList<>();
         this.products = new ArrayList<>();
         this.questions = new ArrayList<>();
+        this.purchases = new ArrayList<>();
+        this.soldItems = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -90,6 +100,14 @@ public class User {
 
     public List<Question> getQuestions() {
         return Collections.unmodifiableList(questions);
+    }
+
+    public List<Purchase> getPurchases() {
+        return Collections.unmodifiableList(purchases);
+    }
+
+    public List<PurchaseItem> getSoldItems() {
+        return Collections.unmodifiableList(soldItems);
     }
 
     public void setNewPassword(String password) {

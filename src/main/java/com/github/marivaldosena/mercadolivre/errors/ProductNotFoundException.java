@@ -1,6 +1,4 @@
-package com.github.marivaldosena.mercadolivre.products;
-
-import com.github.marivaldosena.mercadolivre.errors.ItemNotFoundException;
+package com.github.marivaldosena.mercadolivre.errors;
 
 public class ProductNotFoundException extends ItemNotFoundException {
     public ProductNotFoundException(String message) {

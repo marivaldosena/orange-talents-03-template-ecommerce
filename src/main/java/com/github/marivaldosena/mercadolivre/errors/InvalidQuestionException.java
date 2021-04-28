@@ -1,6 +1,4 @@
-package com.github.marivaldosena.mercadolivre.questions;
-
-import com.github.marivaldosena.mercadolivre.errors.CustomErrorException;
+package com.github.marivaldosena.mercadolivre.errors;
 
 public class InvalidQuestionException extends CustomErrorException {
     public InvalidQuestionException(String message) {

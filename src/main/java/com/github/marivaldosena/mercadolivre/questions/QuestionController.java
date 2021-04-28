@@ -2,8 +2,9 @@ package com.github.marivaldosena.mercadolivre.questions;
 
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
 import com.github.marivaldosena.mercadolivre.errors.InvalidOwnershipException;
+import com.github.marivaldosena.mercadolivre.errors.InvalidQuestionException;
 import com.github.marivaldosena.mercadolivre.products.Product;
-import com.github.marivaldosena.mercadolivre.products.ProductNotFoundException;
+import com.github.marivaldosena.mercadolivre.errors.ProductNotFoundException;
 import com.github.marivaldosena.mercadolivre.products.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

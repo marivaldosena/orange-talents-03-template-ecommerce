@@ -3,6 +3,7 @@ package com.github.marivaldosena.mercadolivre.products;
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
 import com.github.marivaldosena.mercadolivre.categories.Category;
 import com.github.marivaldosena.mercadolivre.categories.CategoryRepository;
+import com.github.marivaldosena.mercadolivre.errors.ProductNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;

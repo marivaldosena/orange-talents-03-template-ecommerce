@@ -2,6 +2,7 @@ package com.github.marivaldosena.mercadolivre.products;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.categories.Category;
+import com.github.marivaldosena.mercadolivre.errors.UnavailableStockException;
 import com.github.marivaldosena.mercadolivre.images.ProductImage;
 import com.github.marivaldosena.mercadolivre.opinions.Opinion;
 import com.github.marivaldosena.mercadolivre.questions.Question;
@@ -151,5 +152,31 @@ public class Product {
 
     public boolean isCurrentUserTheOwner(User currentUser) {
         return this.getUser().getEmail().compareTo(currentUser.getEmail()) == 0;
+    }
+
+    /**
+     * Check stock availability for a given number of items to be sold.
+     * @param desiredQuantity Desired number of items to be sold.
+     * @return Whether the number of products is enough for a given order or not.
+     */
+    public boolean isStockAvailableFor(Integer desiredQuantity) {
+        if (desiredQuantity <= quantity) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Deplete product stock by a given number. If stock is unavailable it throws an UnavailableStockExcpetion.
+     * @param desiredQuantity
+     * @throws UnavailableStockException
+     */
+    public void depleteStockBy(Integer desiredQuantity) throws UnavailableStockException {
+        if (!isStockAvailableFor(desiredQuantity)) {
+            throw new UnavailableStockException("Stock unavailable for " + name);
+        }
+
+        this.quantity -= desiredQuantity;
     }
 }

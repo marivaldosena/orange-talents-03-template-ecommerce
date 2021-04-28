@@ -4,7 +4,7 @@ import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import com.github.marivaldosena.mercadolivre.products.ProductDto;
-import com.github.marivaldosena.mercadolivre.products.ProductNotFoundException;
+import com.github.marivaldosena.mercadolivre.errors.ProductNotFoundException;
 import com.github.marivaldosena.mercadolivre.products.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
