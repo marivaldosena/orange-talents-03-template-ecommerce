@@ -1,9 +1,11 @@
 package com.github.marivaldosena.mercadolivre.emails;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("mockConsole")
+@Primary
 public class MockConsoleEmailSender implements GenericEmailSender {
     @Override
     public void sendEmail(User recipient, String title, String message, User sender) {
