@@ -1,8 +1,6 @@
 package com.github.marivaldosena.mercadolivre.questions;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
-import com.github.marivaldosena.mercadolivre.emails.GenericEmailSender;
-import com.github.marivaldosena.mercadolivre.emails.MockConsoleEmailSender;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -67,11 +65,5 @@ public class Question {
 
     public Product getProduct() {
         return product;
-    }
-
-    @PostPersist
-    private void sendEmail() {
-        GenericEmailSender emailSender = new MockConsoleEmailSender();
-        emailSender.sendEmail(product.getUser(), "Question for " + product.getName(), title, author);
     }
 }

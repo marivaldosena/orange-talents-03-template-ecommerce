@@ -3,9 +3,11 @@ package com.github.marivaldosena.mercadolivre.questions;
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
 import com.github.marivaldosena.mercadolivre.errors.InvalidOwnershipException;
 import com.github.marivaldosena.mercadolivre.errors.InvalidQuestionException;
+import com.github.marivaldosena.mercadolivre.events.NewQuestionEvent;
 import com.github.marivaldosena.mercadolivre.products.Product;
 import com.github.marivaldosena.mercadolivre.errors.ProductNotFoundException;
 import com.github.marivaldosena.mercadolivre.products.ProductRepository;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,12 @@ public class QuestionController {
     static final String RESOURCE_URL = "/api/v1/products/{productId}/questions";
     private final QuestionRepository questionRepository;
     private final ProductRepository productRepository;
+    private final ApplicationEventPublisher publisher;
 
-    public QuestionController(QuestionRepository questionRepository, ProductRepository productRepository) {
+    public QuestionController(QuestionRepository questionRepository, ProductRepository productRepository, ApplicationEventPublisher publisher) {
         this.questionRepository = questionRepository;
         this.productRepository = productRepository;
+        this.publisher = publisher;
     }
 
     @PostMapping
@@ -54,6 +58,8 @@ public class QuestionController {
         }
 
         questionRepository.save(question);
+        publisher.publishEvent(new NewQuestionEvent(this, question));
+
         URI uri = uriBuilder.path(RESOURCE_URL + "/{questionId}").buildAndExpand(productId, question.getId()).toUri();
 
         return ResponseEntity.ok().location(uri).body(new QuestionDto(question));
