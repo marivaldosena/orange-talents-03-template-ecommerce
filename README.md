@@ -67,6 +67,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Primeira parte do processo de compras](#primeira-parte-do-processo-de-compras)
     - [Implementação de Primeira parte do processo de compras](#implementação-de-primeira-parte-do-processo-de-compras)
   - [Segunda parte do processo de compras](#segunda-parte-do-processo-de-compras)
+    - [Implementação de Segunda parte do processo de compras](#implementação-de-segunda-parte-do-processo-de-compras)
   
 # Grade Curricular
 
@@ -556,5 +557,14 @@ Temos alguns passos aqui.
 
 - Status 200 dizendo retornando o status do pagamento.
 - Em caso de erro de validação, retorne 400 e o json com erros.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Segunda parte do processo de compras
+
+Para esta atividade eu criaria alguns atributos na entidade de compras, entre eles o identificador de meio de  pagamento e o momento da execução. É possível criar uma entidade apenas para armazenar os dados referentes ao pagamento, mas acredito ser desnecessário neste exercício.
+
+Utilizaria eventos do Spring para comunicar com os sistemas de Notas Fiscais e de Classificação de Vendedores.
+O mesmo vale para comunicar se ao comprador se houve sucesso ou falha na compra.
 
 [Voltar ao menu](#tópicos)
