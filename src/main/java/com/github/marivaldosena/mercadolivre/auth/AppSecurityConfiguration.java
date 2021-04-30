@@ -1,6 +1,7 @@
 package com.github.marivaldosena.mercadolivre.auth;
 
 import com.github.marivaldosena.mercadolivre.products.ProductController;
+import com.github.marivaldosena.mercadolivre.purchases.gateway.PaymentController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -39,6 +40,7 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, RegistrationController.RESOURCE_URL).permitAll()
                 .antMatchers(HttpMethod.POST, LoginController.RESOURCE_URL).permitAll()
                 .antMatchers(HttpMethod.GET, ProductController.RESOURCE_URL + "/**").permitAll()
+                .antMatchers(PaymentController.RESOURCE_URL).permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

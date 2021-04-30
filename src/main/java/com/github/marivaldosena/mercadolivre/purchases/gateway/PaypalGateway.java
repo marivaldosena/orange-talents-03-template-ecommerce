@@ -1,4 +1,6 @@
-package com.github.marivaldosena.mercadolivre.purchases;
+package com.github.marivaldosena.mercadolivre.purchases.gateway;
+
+import com.github.marivaldosena.mercadolivre.purchases.Purchase;
 
 import java.net.URI;
 
@@ -13,7 +15,7 @@ public class PaypalGateway implements PaymentGateway {
 
     @Override
     public URI getUri() {
-        String urlString = "paypal.com?buyerId=" + purchase.getId() + "&redirectUrl=" + postPaymentUrl;
+        String urlString = "https://paypal.com?buyerId=" + purchase.getId() + "&redirectUrl=" + postPaymentUrl;
         return URI.create(urlString);
     }
 }

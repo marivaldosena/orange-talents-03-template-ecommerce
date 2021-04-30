@@ -2,6 +2,7 @@ package com.github.marivaldosena.mercadolivre.purchases;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.products.ProductRepository;
+import com.github.marivaldosena.mercadolivre.purchases.gateway.GatewayType;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

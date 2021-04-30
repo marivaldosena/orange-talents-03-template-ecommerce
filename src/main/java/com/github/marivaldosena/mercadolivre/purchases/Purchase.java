@@ -1,6 +1,8 @@
 package com.github.marivaldosena.mercadolivre.purchases;
 
 import com.github.marivaldosena.mercadolivre.auth.User;
+import com.github.marivaldosena.mercadolivre.purchases.gateway.GatewayType;
+import com.github.marivaldosena.mercadolivre.purchases.gateway.PaymentGateway;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -24,7 +26,8 @@ public class Purchase {
     private PurchaseStatus status;
 
     @Enumerated(EnumType.STRING)
-    private GatewayType gateway;
+    @Column(name = "gateway")
+    private GatewayType gatewayType;
 
     @OneToMany(mappedBy = "purchase", cascade = {CascadeType.REMOVE, CascadeType.MERGE })
     private List<PurchaseItem> items;
@@ -32,6 +35,9 @@ public class Purchase {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_purchase_buyer_id"))
     private User buyer;
+
+    @Transient
+    private PaymentGateway paymentGateway;
 
     /**
      * @deprecated Hibernate only.
@@ -42,10 +48,11 @@ public class Purchase {
     /**
      *
      * @param buyer Buyer identification.
-     * @param gateway Payment Gateway.
+     * @param gatewayType Payment Gateway.
      */
-    public Purchase(User buyer, GatewayType gateway) {
-        this.gateway = gateway;
+    public Purchase(User buyer, GatewayType gatewayType) {
+        this.gatewayType = gatewayType;
+        this.paymentGateway = gatewayType.getGateway(this, "http://localhost:8080/purchases/payment");
         this.buyer = buyer;
         this.status = PurchaseStatus.STARTED;
         this.items = new ArrayList<>();
@@ -59,8 +66,8 @@ public class Purchase {
         return status;
     }
 
-    public GatewayType getGateway() {
-        return gateway;
+    public GatewayType getGatewayType() {
+        return gatewayType;
     }
 
     public List<PurchaseItem> getItems() {
@@ -73,5 +80,9 @@ public class Purchase {
 
     public void setItems(List<PurchaseItem> items) {
         this.items = items;
+    }
+
+    public PaymentGateway getPaymentGateway() {
+        return paymentGateway;
     }
 }

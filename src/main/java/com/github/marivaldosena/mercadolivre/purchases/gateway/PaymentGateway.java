@@ -1,4 +1,4 @@
-package com.github.marivaldosena.mercadolivre.purchases;
+package com.github.marivaldosena.mercadolivre.purchases.gateway;
 
 import java.net.URI;
 

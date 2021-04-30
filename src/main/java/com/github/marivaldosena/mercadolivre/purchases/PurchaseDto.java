@@ -13,7 +13,7 @@ public class PurchaseDto {
 
     public PurchaseDto(Purchase purchase) {
         this.id = purchase.getId();
-        this.gateway = purchase.getGateway().toString();
+        this.gateway = purchase.getGatewayType().toString();
         this.items = purchase.getItems().stream()
                 .map(PurchaseItemDto::new)
                 .collect(Collectors.toList());

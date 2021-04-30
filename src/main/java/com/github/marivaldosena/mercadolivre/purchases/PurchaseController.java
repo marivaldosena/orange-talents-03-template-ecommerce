@@ -4,6 +4,7 @@ import com.github.marivaldosena.mercadolivre.auth.User;
 import com.github.marivaldosena.mercadolivre.auth.UserCredentials;
 import com.github.marivaldosena.mercadolivre.events.NewPurchaseEvent;
 import com.github.marivaldosena.mercadolivre.products.ProductRepository;
+import com.github.marivaldosena.mercadolivre.purchases.gateway.PaymentHttpClient;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,12 +27,14 @@ public class PurchaseController {
     private ProductRepository productRepository;
     private PurchaseItemRepository itemsRepository;
     private ApplicationEventPublisher publisher;
+    private PaymentHttpClient client;
 
-    public PurchaseController(PurchaseRepository purchaseRepository, ProductRepository productRepository, PurchaseItemRepository itemsRepository, ApplicationEventPublisher publisher) {
+    public PurchaseController(PurchaseRepository purchaseRepository, ProductRepository productRepository, PurchaseItemRepository itemsRepository, ApplicationEventPublisher publisher, PaymentHttpClient client) {
         this.purchaseRepository = purchaseRepository;
         this.productRepository = productRepository;
         this.itemsRepository = itemsRepository;
         this.publisher = publisher;
+        this.client = client;
     }
 
     @PostMapping
@@ -39,7 +42,6 @@ public class PurchaseController {
     public ResponseEntity<PurchaseDto> purchaseProducts(@RequestBody @Valid PurchaseRequest request,
                                               @AuthenticationPrincipal UserCredentials userCredentials,
                                               UriComponentsBuilder uriBuilder) {
-        // TODO: Validate sent gateway.
         User currentUser = userCredentials.toEntity();
 
         Purchase purchase = request.toEntity(currentUser, productRepository);
@@ -48,7 +50,12 @@ public class PurchaseController {
 
         publisher.publishEvent(new NewPurchaseEvent(this, purchase));
         URI uri = uriBuilder.path(RESOURCE_URL + "/{id}").buildAndExpand(purchase.getId()).toUri();
-
+        System.out.println("============================================");
+        System.out.println("FEIGN");
+        System.out.println("============================================");
+        System.out.println("============================================");
+        System.out.println(client.getPayment(purchase.getPaymentGateway()));
+        System.out.println("============================================");
         return ResponseEntity.ok().location(uri).body(new PurchaseDto(purchase));
     }
 }
