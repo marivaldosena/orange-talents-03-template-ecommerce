@@ -36,6 +36,9 @@ public class Purchase {
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_purchase_buyer_id"))
     private User buyer;
 
+    @Column(name = "transaction_id")
+    private String transaction;
+
     @Transient
     private PaymentGateway paymentGateway;
 
@@ -78,11 +81,20 @@ public class Purchase {
         return buyer;
     }
 
-    public void setItems(List<PurchaseItem> items) {
-        this.items = items;
+    public String getTransaction() {
+        return transaction;
     }
 
     public PaymentGateway getPaymentGateway() {
         return paymentGateway;
+    }
+
+    public void setItems(List<PurchaseItem> items) {
+        this.items = items;
+    }
+
+    public void setTransaction(String transaction) {
+        this.status = PurchaseStatus.COMPLETED;
+        this.transaction = transaction;
     }
 }
